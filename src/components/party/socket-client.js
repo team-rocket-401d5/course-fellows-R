@@ -1,21 +1,24 @@
-import React, { useEffect, useState } from 'react';
-import socketIOClient from "socket.io-client";
+import React, { useContext, useState } from 'react';
 import Chat from './chat/chat.js';
-
-const ENDPOINT = "http://localhost:4000/"; //server endpoint
-const socket = socketIOClient(ENDPOINT);
+import { SocketClientContext } from '../context/socketClientContext.js'
 
 function SocketClient(props) {
+  const context = useContext(SocketClientContext);
   const [messages, setMessages] = useState([]);
+  const { match: { params } } = props;
+  const roomId= params.roomId;
+
   const handleMsgSubmit = (sentMsg) => {//gets the message from the input form (send)
     let emitted = sentMsg;
     setMessages([...messages,sentMsg]); //TODO: push it to the message q
-    socket.emit('chat message', emitted);
+    context.socket.emit('chat message', {emitted,roomId});
   }
 
-  socket.on("Msg", msg => { //will trigger an event everytime the state updates (receive)
+
+  context.socket.on("Msg", msg => { //will trigger an event everytime the state updates (receive)
     //TODO: spread when message q added
-    setMessages([...messages , msg.msg]);
+    console.log(msg.roomId);
+      setMessages([...messages , msg.msg]);
   });
 
   return (

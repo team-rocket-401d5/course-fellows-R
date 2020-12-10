@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from 'react';
+import React, {  useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 
 import ChatBubble from './ChatBubble.js';
 
-function chat(props) {
-  let msg = ''
+function Chat(props) {
+  // let msg = ''
+  const [input,setInput] = useState('')
   const handleMsgChange = (e) => {
-    msg = e.target.value;
+    setInput(e.target.value);
   }
   const handleFormSumbit = (e) => {
     e.preventDefault();
-    if ((msg !== '') && (msg !== ' ')) {
-      props.handleMsgSubmit(msg);
+    if ((input !== '') && (input !== ' ')) {
+      props.handleMsgSubmit(input);
     }
-    e.target.value = '';
+    setInput('');
   }
   
   return (
@@ -22,12 +23,12 @@ function chat(props) {
       {props.payload.map((item)=><ChatBubble text={item} />
       )}
       <Form onSubmit={handleFormSumbit}>
-        <Form.Control type="text" placeholder="Send a message" onChange={handleMsgChange} />
-        <Button variant="primary" type="submit">Submit</Button>
+        <Form.Control type="text" placeholder="Send a message" onChange={handleMsgChange} value={input}/>
+        <Button variant="primary" type="submit">Send</Button>
       </Form>
     </>
   );
 }
 
-export default chat;
+export default Chat;
 
