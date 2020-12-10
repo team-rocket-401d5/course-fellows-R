@@ -26,6 +26,7 @@ function Oauth() {
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={'single_host_origin'}
+      style={{width:'100%'}}
     />
   );
 }
