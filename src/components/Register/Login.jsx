@@ -1,7 +1,8 @@
 import React, { useContext, useState } from 'react';
+import { If, Else, Then } from 'react-if';
 import { RegisterContext } from '../../context/auth';
 import { Button, Form, Navbar, FormControl } from 'react-bootstrap';
-import { If, Else, Then } from 'react-if';
+import Oauth from './Oauth';
 
 function Login(props) {
   const context = useContext(RegisterContext);
@@ -48,6 +49,7 @@ function Login(props) {
             <Button variant="outline-light" type="submit">
               Login
             </Button>
+            <Oauth />
           </Form>
         </Navbar>
       </Else>

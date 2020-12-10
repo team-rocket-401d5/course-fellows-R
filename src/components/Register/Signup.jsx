@@ -8,17 +8,21 @@ function Signup(props) {
   const context = useContext(RegisterContext);
   const [username, setusername] = useState('');
   const [password, setpassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleChange = e => {
     if (e.target.name === 'username') {
       setusername(e.target.value);
     } else if (e.target.name === 'password') {
       setpassword(e.target.value);
+    } else if (e.target.name === 'Confirm') {
+      setConfirmPassword(e.target.value);
     }
   };
   const handleSubmit = e => {
     e.preventDefault();
-    context.signup(username, password);
+    if (password !== confirmPassword) alert('your passwords are not equal');
+    else context.signup(username, password);
   };
 
   return (
@@ -33,18 +37,28 @@ function Signup(props) {
               placeholder="Enter Username"
               onChange={handleChange}
               className="mr-sm-2"
+              value={username}
             />
             <FormControl
-              type="text"
+              type="password"
               name="password"
               placeholder="Enter password"
               onChange={handleChange}
               className="mr-sm-2"
+              value={password}
+            />
+            <FormControl
+              type="password"
+              name="Confirm"
+              placeholder="Confirm password"
+              onChange={handleChange}
+              className="mr-sm-2"
+              value={confirmPassword}
             />
             <Button variant="outline-light" type="submit">
               signup
             </Button>
-            <Oauth></Oauth>
+            <Oauth />
           </Form>
         </Navbar>
       </Else>

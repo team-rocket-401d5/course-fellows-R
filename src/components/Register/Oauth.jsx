@@ -10,6 +10,7 @@ function Oauth() {
   };
 
   const responseGoogle = async response => {
+    console.log(response);
     console.log(response.profileObj.email);
 
     const email = { email: response.profileObj.email };
@@ -21,7 +22,7 @@ function Oauth() {
     <GoogleLogin
       clientId={options.client_id}
       redirectUri={options.redirect_uri}
-      buttonText="Login"
+      buttonText="Continue using gmail"
       onSuccess={responseGoogle}
       onFailure={responseGoogle}
       cookiePolicy={'single_host_origin'}
