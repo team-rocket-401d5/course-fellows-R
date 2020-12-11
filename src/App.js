@@ -8,7 +8,9 @@ import Auth from './context/outhprevent';
 import Landing from './components/landingPage';
 import MyCourses from './components/myCourses';
 import Nav from './components/nav';
+import PublicCourses from './components/publicCourses'
 import Home from './components/Home';
+
 
 function App() {
   return (
@@ -18,11 +20,13 @@ function App() {
           <Auth />
           <Nav />
           <Register />
+          
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/register" component={Register} />
             <Route path='/party' component={JoinRoom} />
             <Route path='/party/:roomId' component={SocketClient} />
+            <Route path='/public' component={PublicCourses}/>
           </Switch>
         </SocketClientProvider>
       </RegisterProvider>
