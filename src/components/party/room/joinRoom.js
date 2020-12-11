@@ -2,7 +2,7 @@ import React ,{useContext}from 'react';
 import { Form , Button } from 'react-bootstrap';
 import uniqId from 'uniqid';
 import { useHistory } from "react-router-dom";
-import { SocketClientContext } from '../../context/socketClientContext.js'
+import { SocketClientContext } from '../../../context/socketClientContext.js'
 
 let roomId='';
 function JoinRoom(props) {

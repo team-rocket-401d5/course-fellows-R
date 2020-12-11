@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import Chat from './chat/chat.js';
-import { SocketClientContext } from '../context/socketClientContext.js'
+import { SocketClientContext } from '../../context/socketClientContext.js'
 
 function SocketClient(props) {
   const context = useContext(SocketClientContext);
