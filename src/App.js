@@ -17,9 +17,9 @@ function App() {
     <div className="App">
       <RegisterProvider>
         <SocketClientProvider>
-          <Auth />
+          {/* <Auth /> */}
           <Nav />
-          <Register />
+          {/* <Register /> */}
           
           <Switch>
             <Route exact path="/" component={Home} />
