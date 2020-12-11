@@ -3,7 +3,8 @@ import Login from './Login';
 import Signup from './Signup';
 import { If, Else, Then } from 'react-if';
 import { Container, Image, Col, Row } from 'react-bootstrap';
-let image ='https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
+let image =
+  'https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
 function Register() {
   let [wantSignup, setWantSignup] = useState(false);
   return (
@@ -15,14 +16,14 @@ function Register() {
           style={{ paddingTop: 39 }}
         >
           <Row>
-            <Col md="6">
+            <Col md="8">
               <Image
                 src="https://i.pinimg.com/564x/1b/61/21/1b61216ceaccc25f3c386dce23ea567e.jpg"
                 className="img-fluid"
                 rounded
               />
             </Col>
-            <Col md="6">
+            <Col md="4">
               <If condition={wantSignup}>
                 <Then>
                   <Login></Login>
