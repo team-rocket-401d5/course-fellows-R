@@ -6,8 +6,12 @@ import Register from './components/Register';
 import RegisterProvider from './context/auth';
 import Auth from './context/outhprevent';
 import Landing from './components/landingPage';
+import MyCourses from './components/myCourses';
 import Nav from './components/nav';
 import PublicCourses from './components/publicCourses'
+import Home from './components/Home';
+
+
 function App() {
   return (
     <div className="App">
@@ -18,7 +22,7 @@ function App() {
           <Register />
           
           <Switch>
-            <Route exact path="/" component={Landing} />
+            <Route exact path="/" component={Home} />
             <Route path="/register" component={Register} />
             <Route path='/party' component={JoinRoom} />
             <Route path='/party/:roomId' component={SocketClient} />

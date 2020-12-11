@@ -16,7 +16,6 @@ function RegisterProvider(props) {
   const [user, setuser] = useState({});
   const [token,setToken]=useState('')
 
-
   const validateToken = token => {
     console.log(token);
     try {
@@ -32,6 +31,7 @@ function RegisterProvider(props) {
   };
   const setLoginState = (loggedIn, token, user) => {
     cookie.save('auth', token);
+    setToken(token);
     setuser(user);
     setloggedIn(loggedIn);
     setToken(token);
@@ -45,6 +45,7 @@ function RegisterProvider(props) {
         .set('authorization', `Basic ${btoa(`${username}:${password}`)}`);
       console.log('userrr', response.body);
       validateToken(response.body.token);
+      console.log(response.body.token);
     } catch (e) {
       console.error(e.message);
     }

@@ -1,12 +1,20 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import Login from './Login';
 import Signup from './Signup';
 import { If, Else, Then } from 'react-if';
 import { Container, Image, Col, Row } from 'react-bootstrap';
-let image =
-  'https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
+import { RegisterContext } from '../../context/auth';
+let image = 'https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
+
 function Register() {
+  let history = useHistory();
   let [wantSignup, setWantSignup] = useState(false);
+  const { loggedIn } = useContext(RegisterContext);
+  useEffect(() => {
+    console.log('hi');
+    if (loggedIn) history.push('/');
+  }, [history, loggedIn]);
   return (
     <>
       <section className="register">

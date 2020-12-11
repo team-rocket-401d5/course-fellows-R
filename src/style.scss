@@ -57,7 +57,17 @@ nav {
     // bottom: 0;
   }
 }
-
+.my-courses {
+  .user-courses-btns {
+    button {
+      padding: 0.12em 0.6em;
+    }
+  }
+  .progress-bar {
+    background-color: #306998;
+  }
+}
+// utilities
 .flex-center {
   display: flex;
   justify-content: center;
@@ -65,13 +75,22 @@ nav {
 }
 
 .btn {
-  background-color: #ff8f12;
+  background-color: #306998;
   color: #fff;
-  border-radius: 18px;
+  border-radius: 10px;
   align-self: flex-end;
   &:hover {
-    background-color: #ff9723;
+    background-color: #4b8bbe;
     color: #fff;
     transition: all 0.15s ease-in-out;
   }
+}
+.font-1-5 {
+  font-size: 1.5rem;
+}
+.font-2 {
+  font-size: 2rem;
+}
+.pointer {
+  cursor: pointer;
 }
