@@ -7,7 +7,7 @@ import RegisterProvider from './context/auth';
 import Auth from './context/outhprevent';
 import Landing from './components/landingPage';
 import Nav from './components/nav';
-
+import PublicCourses from './components/publicCourses'
 function App() {
   return (
     <div className="App">
@@ -16,11 +16,13 @@ function App() {
           <Auth />
           <Nav />
           <Register />
+          
           <Switch>
             <Route exact path="/" component={Landing} />
             <Route path="/register" component={Register} />
             <Route path='/party' component={JoinRoom} />
             <Route path='/party/:roomId' component={SocketClient} />
+            <Route path='/public' component={PublicCourses}/>
           </Switch>
         </SocketClientProvider>
       </RegisterProvider>
