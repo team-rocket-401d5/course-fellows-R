@@ -6,6 +6,7 @@ import { If, Else, Then } from 'react-if';
 import { Container, Image, Col, Row } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
 let image = 'https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
+
 function Register() {
   let history = useHistory();
   let [wantSignup, setWantSignup] = useState(false);
@@ -17,7 +18,11 @@ function Register() {
   return (
     <>
       <section className="register">
-        <Container className="justify-content-md-center" fluid="sm" style={{ paddingTop: 39 }}>
+        <Container
+          className="justify-content-md-center"
+          fluid="sm"
+          style={{ paddingTop: 39 }}
+        >
           <Row>
             <Col md="8">
               <Image
@@ -37,13 +42,20 @@ function Register() {
               </If>
 
               <a
-                style={{ width: '100%', margin: '0 auto', display: 'block', textAlign: 'center' }}
+                style={{
+                  width: '100%',
+                  margin: '0 auto',
+                  display: 'block',
+                  textAlign: 'center',
+                }}
                 href="#1"
                 onClick={() => {
                   setWantSignup(!wantSignup);
                 }}
               >
-                {wantSignup ? 'Dont have account? sign up now' : 'already a user?'}
+                {wantSignup
+                  ? 'Dont have account? sign up now'
+                  : 'already a user?'}
               </a>
             </Col>
           </Row>
