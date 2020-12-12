@@ -8,32 +8,34 @@ import Auth from './context/outhprevent';
 import Landing from './components/landingPage';
 import MyCourses from './components/myCourses';
 import Nav from './components/nav';
-import PublicCourses from './components/publicCourses'
+import PublicCourses from './components/publicCourses';
 import Home from './components/Home';
+import DetailCourse from './components/detailCourse';
 
+import Detailvideo from './components/detailVideo.jsx';
 
 function App() {
-  return (
-    <div className="App">
-      <RegisterProvider>
-        <SocketClientProvider>
-          {/* <Auth /> */}
-          <Nav />
-          {/* <Register /> */}
-          
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path='/party' component={JoinRoom} />
-            <Route path='/party/:roomId' component={SocketClient} />
-            <Route path='/public' component={PublicCourses}/>
-          </Switch>
-        </SocketClientProvider>
-      </RegisterProvider>
-    </div>
-  );
+	return (
+		<div className="App">
+			<RegisterProvider>
+				<SocketClientProvider>
+					{/* <Auth /> */}
+					<Nav />
 
-
+					<Switch>
+						<Route exact path="/" component={Home} />
+						<Route path="/register" component={Register} />
+						<Route path="/party" component={JoinRoom} />
+						<Route path="/course/:id" component={DetailCourse} />
+						<Route path="/public/:publicid" component={DetailCourse} />
+						<Route path="/video/:id" component={Detailvideo} />
+						<Route path="/party/:roomId" component={SocketClient} />
+						<Route path="/public" component={PublicCourses} />
+					</Switch>
+				</SocketClientProvider>
+			</RegisterProvider>
+		</div>
+	);
 }
 
 export default App;
