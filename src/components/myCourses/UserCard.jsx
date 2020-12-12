@@ -1,9 +1,10 @@
 import React from 'react';
 import { Card, Button, ProgressBar } from 'react-bootstrap';
 import { BsX } from 'react-icons/bs';
+import { useHistory } from 'react-router-dom';
 import { FaRegPaperPlane } from 'react-icons/fa';
-
 function UserCard({ course, addToPublic, deleteCourse }) {
+  let history = useHistory();
   console.log(course);
   let now = (course.time_watched / course.total_duration) * 100;
   return (
@@ -17,7 +18,13 @@ function UserCard({ course, addToPublic, deleteCourse }) {
           }}
         />
       </div>
-      <Card.Img variant="top" src={course.playlist.thumbnail} />
+      <Card.Img
+        onClick={() => {
+          console.log(course);
+          history.push(`/course/${course._id}`);
+
+        }}
+        variant="top" src={course.playlist.thumbnail} />
       <Card.Body>
         <Card.Title>{course.playlist.playlist_title}</Card.Title>
         <ProgressBar now={now} label={`${now}%`} className="mb-2" />
