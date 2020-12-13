@@ -1,8 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
-import { Button, Form, Navbar, Container, Col, Row } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
 import UserCard from './UserCard';
+import CreateCourseForm from '../createCourseForm';
+
 function MyCourses() {
   let url = `http://localhost:4000`;
   const { user, token } = useContext(RegisterContext);
@@ -13,12 +15,13 @@ function MyCourses() {
       .get(`${url}/user/${user.username}/courses`)
       .set('authorization', `bearer ${token}`)
       .then(({ body }) => setCourses(body))
-      .catch((e) => console.log(e));
+      .catch(e => console.log(e));
   }
   useEffect(() => {
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, url]);
+
 
   function addToPublic(courseId) {
     // /:user/courses/:course
@@ -42,21 +45,8 @@ function MyCourses() {
   return (
     <section className="my-courses">
       <Container>
-        <Form className="create-course">
-          <h2>Create your course now</h2>
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>
-              Enter a playlist url from youtube to create a new course
-            </Form.Label>
-            <Form.Control
-              type="email"
-              placeholder="youtube.com/playlist?list=course-id"
-            />
-            <Form.Text className="text-muted"></Form.Text>
-          </Form.Group>
-          <Button>Create</Button>
-        </Form>
-        <h2 className="title">My Courses</h2>
+        <CreateCourseForm />
+        <h2 className="title">My Courses</h2>        
         <article>
           <Row>
             {courses.map((item) => (

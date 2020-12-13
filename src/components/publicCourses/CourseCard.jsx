@@ -42,10 +42,8 @@ function AddButton(props) {
 function CourseCard(props) {
   let history = useHistory();
   const context = useContext(RegisterContext);
-
   const [isLiked, setIsLiked] = useState(false);
   const [like, setLike] = useState([]);
-  // const [isAdded, setIsAdded] = useState(false);
 
   function handleLike(id) {
     superagent
@@ -67,14 +65,15 @@ function CourseCard(props) {
       .set('authorization', `bearer ${context.token}`)
       .send({ username: context.user.username })
       .then(({ body }) => {
+
         history.push('/');
       });
-    // setIsAdded(!isAdded);
   }
 
   useEffect(() => {
     props.update();
   }, [props, like]);
+
 
   return (
     <>
@@ -101,13 +100,11 @@ function CourseCard(props) {
                     <Card.Body className="justify-content-between d-flex">
                       <Card.Link
                         onClick={() => {
-                          console.log('i', item);
                           handleLike(item._id);
                         }}
                       >
-                        <If
-                          condition={item.likes.includes(context.user.username)}
-                        >
+                        <If condition={item.likes.includes(context.user.username)}>
+
                           <Then>
                             <BsHeartFill />
                           </Then>
@@ -117,6 +114,7 @@ function CourseCard(props) {
                         </If>
                         {item.likes.length}
                       </Card.Link>
+
                       <AddButton handleAdd={handleAdd} courseId={item._id} />
                     </Card.Body>
                   </Then>

@@ -14,7 +14,8 @@ export const RegisterContext = React.createContext();
 function RegisterProvider(props) {
   const [loggedIn, setloggedIn] = useState(false);
   const [user, setuser] = useState({});
-  const [token,setToken]=useState('')
+  const [token, setToken] = useState('');
+
 
   const validateToken = token => {
     try {
@@ -39,6 +40,7 @@ function RegisterProvider(props) {
         .post(`${LOGIN}`)
         .set('authorization', `Basic ${btoa(`${username}:${password}`)}`);
       validateToken(response.body.token);
+      console.log(response.body.token);
     } catch (e) {
       console.error(e.message);
     }

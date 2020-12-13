@@ -1,3 +1,4 @@
+
 import { Route, Switch } from 'react-router-dom';
 import SocketClient from './components/party/socket-client';
 import JoinRoom from './components/party/room/joinRoom.js';
@@ -11,15 +12,14 @@ import Nav from './components/nav';
 import PublicCourses from './components/publicCourses';
 import Home from './components/Home';
 import DetailCourse from './components/detailCourse';
-
 import Detailvideo from './components/detailVideo.jsx';
+import CustomizedCourse from './components/createCourse';
 
 function App() {
 	return (
 		<div className="App">
 			<RegisterProvider>
 				<SocketClientProvider>
-					{/* <Auth /> */}
 					<Nav />
 
 					<Switch>
@@ -31,6 +31,7 @@ function App() {
 						<Route path="/video/:courseId/:id" component={Detailvideo} />
 						<Route path="/party/:roomId" component={SocketClient} />
 						<Route path="/public" component={PublicCourses} />
+            <Route path="/createCourse" component={CustomizedCourse} />
 					</Switch>
 				</SocketClientProvider>
 			</RegisterProvider>
