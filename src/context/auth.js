@@ -17,12 +17,9 @@ function RegisterProvider(props) {
   const [token,setToken]=useState('')
 
   const validateToken = token => {
-    console.log(token);
     try {
       const user = jwt.verify(token, SECRET);
-      console.log(token, user);
       // const user = jwt.decode(token);
-      console.log('hi', user);
       setLoginState(true, token, user);
     } catch (e) {
       console.log(`TOKEN validation ERROR ${e.message}`);
@@ -35,17 +32,13 @@ function RegisterProvider(props) {
     setuser(user);
     setloggedIn(loggedIn);
     setToken(token);
-    console.log('hi', user);
   };
   const login = async (username, password) => {
     try {
-      console.log(LOGIN);
       const response = await superagent
         .post(`${LOGIN}`)
         .set('authorization', `Basic ${btoa(`${username}:${password}`)}`);
-      console.log('userrr', response.body);
       validateToken(response.body.token);
-      console.log(response.body.token);
     } catch (e) {
       console.error(e.message);
     }
@@ -54,7 +47,6 @@ function RegisterProvider(props) {
   const signup = async (username, password) => {
     try {
       const response = await superagent.post(`${SIGNUP}`).send({ username, password });
-      console.log(response.body);
       validateToken(response.body.token);
     } catch (e) {
       console.error(e.message);
@@ -62,12 +54,12 @@ function RegisterProvider(props) {
   };
   const oauth = async username => {
     const result = await superagent.post(postUrl).send(username);
-    console.log(result.body);
     validateToken(result.body.token_value);
   };
 
   const logout = () => {
     setLoginState(false, null, {});
+    cookie.remove('auth');
   };
   useEffect(() => {
     const token = cookie.load('auth');
@@ -85,7 +77,6 @@ function RegisterProvider(props) {
     oauth,
     token,
   };
-  console.log('bbb', state);
 
   return <RegisterContext.Provider value={state}>{props.children}</RegisterContext.Provider>;
 }
