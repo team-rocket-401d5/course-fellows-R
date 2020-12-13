@@ -93,6 +93,17 @@ nav {
     transition: all 0.15s ease-in-out;
   }
 }
+.icon{
+  color: #306998;
+  width:20px;
+  &:hover{
+    color:  #e96c28;
+  }
+  &.clicked{
+    color:  #e96c28;
+
+  }
+}
 .font-1-5 {
   font-size: 1.5rem;
 }
@@ -104,6 +115,13 @@ nav {
 }
 .height-100{
   height: calc(100vh - 56px);
+}
+.height-50{
+  height: calc(100vh - 200px);
+}
+
+.width-75{
+  width: calc(70vw );
 }
 .overflow-y{
   overflow-y: scroll;

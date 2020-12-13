@@ -14,6 +14,7 @@ function Detailvideo(props) {
   } = props;
   const { courseId, id } = params;
   const { user, token } = useContext(RegisterContext);
+  // const [note, setNote] = useState('');
 
   useEffect(() => {
     ///:user/courses/:course/:vidID
@@ -23,6 +24,7 @@ function Detailvideo(props) {
         .set('authorization', `bearer ${token}`)
         .then(({ body }) => {
           setVideo(body);
+          // setNote(body.note)
         })
         .catch((e) => console.log(e));
     }
@@ -32,7 +34,7 @@ function Detailvideo(props) {
     <>
       <Container fluid>
         <Row noGutters>
-          <Col className="height-100" xs={12} md={3}>
+          <Col className="overflow-y height-100" xs={12} md={3}>
             <VideoList
               video={video}
               courseId={courseId}
@@ -40,8 +42,8 @@ function Detailvideo(props) {
               user={user.username}
             />
           </Col>
-          <Col xs={12} md={6}>
-            <Video video={video} courseId={courseId} videoId={id} />
+          <Col className="height-100" xs={12} md={6}>
+            <Video video={video} courseId={courseId} videoId={id}  />
           </Col>
         </Row>
       </Container>

@@ -7,6 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 import { BsFillPlusCircleFill, BsXCircleFill } from 'react-icons/bs';
 import { v1 as uuid } from 'uuid';
 import SectionForm from './sectionForm';
+
 function CustomizedCourse({ location }) {
   console.log(location.state.payload);
   const history = useHistory();
@@ -21,6 +22,8 @@ function CustomizedCourse({ location }) {
   const handleClose = () => setShow(false);
   let backend = 'http://localhost:4000';
   const handleShow = () => setShow(true);
+
+  
   function create(url) {
     console.log(url);
     let playlist = { playlist: url };
@@ -40,7 +43,7 @@ function CustomizedCourse({ location }) {
   function insertAt(array, index, element) {
     array.splice(index, 0, element);
   }
-  function createSeaction() {
+  function createSection() {
     console.log(videoIndex);
     const currentSections = sections;
     // if no sections yet
@@ -122,6 +125,8 @@ function CustomizedCourse({ location }) {
       default:
         break;
     }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -138,17 +143,21 @@ function CustomizedCourse({ location }) {
             variant="primary"
             onClick={() => {
               handleClose();
-              createSeaction();
+              createSection();
             }}
           >
             create
           </Button>
         </Modal.Footer>
       </Modal>
-      <h1>Hi its meeeee hahahahah</h1>
+      <h1>Organize Course</h1>
       <button className="btn" onClick={addCourse}>
         Create
       </button>
+      <button className="btn" onClick={()=>{history.push('/')}}>
+        Cancel
+      </button>
+
       <DragDropContext onDragEnd={handleDragEnd}>
         {sections.map((section, index) => {
           return (

@@ -10,18 +10,19 @@ function MyCourses() {
   const { user, token } = useContext(RegisterContext);
   // user/:user/courses to get all courses for one user
   let [courses, setCourses] = useState([]);
+  const [modalShow, setModalShow] = React.useState(false);
+
   function getCourses() {
     superagent
       .get(`${url}/user/${user.username}/courses`)
       .set('authorization', `bearer ${token}`)
       .then(({ body }) => setCourses(body))
-      .catch(e => console.log(e));
+      .catch((e) => console.log(e));
   }
   useEffect(() => {
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, url]);
-
 
   function addToPublic(courseId) {
     // /:user/courses/:course
@@ -39,14 +40,21 @@ function MyCourses() {
       .catch((e) => console.log(e.message));
 
     getCourses();
-
   }
 
   return (
     <section className="my-courses">
       <Container>
-        <CreateCourseForm />
-        <h2 className="title">My Courses</h2>        
+        <CreateCourseForm show={modalShow} onHide={() => setModalShow(false)} />
+        <Container>
+          <Row className="justify-content-between">
+            <h2 className="title">My Courses</h2>
+            <Button variant="primary" onClick={() => setModalShow(true)}>
+              Add a new Course
+            </Button>
+          </Row>
+        </Container>
+
         <article>
           <Row>
             {courses.map((item) => (
