@@ -16,8 +16,12 @@ function MainNav() {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="ml-auto">
-            <Nav.Link href="/">{context.loggedIn ? 'My Courses' : 'Home'}</Nav.Link>
-            <Nav.Link as={Link} to="/public">Courses</Nav.Link>
+            <Nav.Link href="/">
+              {context.loggedIn ? 'My Courses' : 'Home'}
+            </Nav.Link>
+            <Nav.Link as={Link} to="/public">
+              Courses
+            </Nav.Link>
             <If condition={context.loggedIn}>
               <Then>
                 <Nav.Link as={Link} to="/" onClick={context.logout}>

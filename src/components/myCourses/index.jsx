@@ -13,31 +13,30 @@ function MyCourses() {
       .get(`${url}/user/${user.username}/courses`)
       .set('authorization', `bearer ${token}`)
       .then(({ body }) => setCourses(body))
-      .catch(e => console.log(e));
+      .catch((e) => console.log(e));
   }
   useEffect(() => {
-    console.log(user.username);
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, url]);
 
-  async function addToPublic(courseId) {
+  function addToPublic(courseId) {
     // /:user/courses/:course
-    const { body } = await superagent
+    superagent
       .post(`${url}/user/${user.username}/courses/${courseId}`)
-      .set('authorization', `bearer ${token}`);
-
-    console.log(body);
+      .set('authorization', `bearer ${token}`)
+      .catch((e) => console.log(e.message));
   }
 
-  async function deleteCourse(courseId) {
+  function deleteCourse(courseId) {
     // /:user/courses/:course
-    const { body } = await superagent
+    superagent
       .delete(`${url}/user/${user.username}/courses/${courseId}`)
-      .set('authorization', `bearer ${token}`);
+      .set('authorization', `bearer ${token}`)
+      .catch((e) => console.log(e.message));
+
     getCourses();
 
-    console.log(body);
   }
 
   return (
@@ -46,8 +45,13 @@ function MyCourses() {
         <Form className="create-course">
           <h2>Create your course now</h2>
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Enter a playlist url from youtube to create a new course</Form.Label>
-            <Form.Control type="email" placeholder="youtube.com/playlist?list=course-id" />
+            <Form.Label>
+              Enter a playlist url from youtube to create a new course
+            </Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="youtube.com/playlist?list=course-id"
+            />
             <Form.Text className="text-muted"></Form.Text>
           </Form.Group>
           <Button>Create</Button>
@@ -55,9 +59,13 @@ function MyCourses() {
         <h2 className="title">My Courses</h2>
         <article>
           <Row>
-            {courses.map(item => (
+            {courses.map((item) => (
               <Col xs={12} sm={6} lg={3} key={item._id}>
-                <UserCard course={item} addToPublic={addToPublic} deleteCourse={deleteCourse} />
+                <UserCard
+                  course={item}
+                  addToPublic={addToPublic}
+                  deleteCourse={deleteCourse}
+                />
               </Col>
             ))}
           </Row>

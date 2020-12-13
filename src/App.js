@@ -28,7 +28,7 @@ function App() {
 						<Route path="/party" component={JoinRoom} />
 						<Route path="/course/:id" component={DetailCourse} />
 						<Route path="/public/:publicid" component={DetailCourse} />
-						<Route path="/video/:id" component={Detailvideo} />
+						<Route path="/video/:courseId/:id" component={Detailvideo} />
 						<Route path="/party/:roomId" component={SocketClient} />
 						<Route path="/public" component={PublicCourses} />
 					</Switch>

@@ -1,58 +1,60 @@
-import React, { useState, useEffect, useContext } from 'react'
+import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 import { RegisterContext } from '../../context/auth';
-import { ListGroup, Image, Card, ProgressBar, ListGroupItem, Container, Row, Col } from 'react-bootstrap';
+import { Container, Row, Col } from 'react-bootstrap';
+import Video from './video';
+import VideoList from './videolist';
+
 function Detailvideo(props) {
-    // const [course, setCourse] = useState({ sections: [], playlist: {} })
+  const url = 'http://localhost:4000';
+  const [video, setVideo] = useState({});
 
-    // const [ispublic, setIspublic] = useState(false)
+  const {
+    match: { params },
+  } = props;
+  const { courseId, id } = params;
+  const { user, token } = useContext(RegisterContext);
 
+  useEffect(() => {
+    ///:user/courses/:course/:vidID
+    if (id) {
+      superagent
+        .get(`${url}/user/${user.username}/courses/${courseId}/${id}`)
+        .set('authorization', `bearer ${token}`)
+        .then(({ body }) => {
+          setVideo(body);
+        })
+        .catch((e) => console.log(e));
+    }
+  }, [courseId, id, token, user.username]);
 
-    // const { match: { params } } = props
-    // const { user, token } = useContext(RegisterContext);
-    // console.log('user', user, token, params.id)
+  return (
+    <>
+      <Container fluid>
+        <Row noGutters>
+          <Col className="height-100" xs={12} md={3}>
+            <VideoList
+              video={video}
+              courseId={courseId}
+              videoId={id}
+              user={user.username}
+            />
+          </Col>
+          <Col xs={12} md={6}>
+            <Video video={video} courseId={courseId} videoId={id} />
+          </Col>
+        </Row>
+      </Container>
+    </>
 
-    // let url = `http://localhost:4000`
+    // <Container fluid >
+    //     <Row noGutters >
+    //         <Col className=' overflow-y height-100' xs={12} md={3}><Section course={course} ispublic={ispublic} /></Col>
+    //         <Col className="overflow-y height-100" xs={12} md={9}> <VideoList course={course} ispublic={ispublic} /></Col>
+    //     </Row>
 
-    // useEffect(() => {
-    //     if (params.id) {
-
-    //         superagent
-    //             .get(`${url}/user/${user.username}/courses/${params.id}`)
-    //             .set('authorization', `bearer ${token}`)
-    //             .then(({ body }) => {
-    //                 setCourse(body)
-    //                 console.log('user2', body)
-
-    //             }).catch(e => console.log(e))
-    //     } else if (params.publicid) {
-    //         superagent
-    //             .get(`${url}/public/${params.publicid}`)
-    //             .set('authorization', `bearer ${token}`)
-    //             .then(({ body }) => {
-    //                 setCourse(body)
-    //                 setIspublic(true)
-    //                 console.log('user2', body)
-
-    //             }).catch(e => console.log(e))
-    //     }
-
-    // }, [params.id, params.publicid, token, url, user.username])
-    // console.log('c', course)
-    // // /:user/courses/:course'
-
-    // return (
-
-    //     <Container fluid >
-    //         <Row noGutters >
-    //             <Col className=' overflow-y height-100' xs={12} md={3}><Section course={course} ispublic={ispublic} /></Col>
-    //             <Col className="overflow-y height-100" xs={12} md={9}> <VideoList course={course} ispublic={ispublic} /></Col>
-    //         </Row>
-
-    //     </Container>
-
-
-    // )
+    // </Container>
+  );
 }
 
-export default Detailvideo
+export default Detailvideo;
