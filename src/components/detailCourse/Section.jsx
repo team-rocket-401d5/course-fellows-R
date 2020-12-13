@@ -8,7 +8,7 @@ import {
 import { If} from 'react-if';
 
 function Section(props) {
-  let now = (props.course.time_watched / props.course.total_duration) * 100;
+  let now = Math.floor((props.course.time_watched / props.course.total_duration) * 100);
 
   console.log('prop', props.ispublic);
   // /:user/courses/:course'

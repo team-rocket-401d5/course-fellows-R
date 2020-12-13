@@ -1,27 +1,20 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import superagent from 'superagent';
 import { RegisterContext } from '../../context/auth';
-import {
-  Form,
-  Button,
-  Container,
-  Row,
-  Col,
-} from 'react-bootstrap';
+import { Form, Button } from 'react-bootstrap';
 import Iframe from 'react-iframe';
 import { If, Then, Else } from 'react-if';
 
 function Video(props) {
   let str = props.video.url_simple ? props.video.url_simple : ' ';
   let res = str.replace(/(\/watch\?v=)/g, '/embed/');
-  console.log(res, str, 'res', props.video);
   const [noteActive, setNoteActive] = useState(false);
   const [note, setNote] = useState('');
 
   const { user, token } = useContext(RegisterContext);
 
   const updateNote = (note, user1) => {
-    const url = 'http://localhost:4000';
+    let url = 'http://localhost:4000';
     //:user/courses/:course/:vidID/notes
     superagent
       .patch(
@@ -30,13 +23,28 @@ function Video(props) {
       .set('authorization', `bearer ${token}`)
       .send({ note: note, user: user1 })
       .then(({ body }) => {
-        console.log('notebody', body);
+        get();
       })
       .catch((e) => console.log('errroerere', e.message));
   };
+  function get() {
+    superagent
+      .get(
+        ` http://localhost:4000/user/${user.username}/courses/${props.courseId}/${props.videoId}`
+      )
+      .set('authorization', `bearer ${token}`)
+      .then(({ body }) => {
+        setNote(body.note);
+      })
+      .catch((e) => console.log(e));
+  }
+  useEffect(() => {
+    ///:user/courses/:course/:vidID
+    get();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [token, user.username, props.videoId]);
 
   const handleChange = (e) => {
-    console.log(e.target.value);
     setNote(e.target.value);
   };
   const handleSubmit = (e) => {
@@ -50,10 +58,10 @@ function Video(props) {
       <h2>{props.video.title}</h2>
       <Iframe
         url={`${res}`}
-        width="450px"
-        height="450px"
+        // width="450px"
+        // height="450px"
         id="myId"
-        className="myClassname"
+        className="width-75 height-50"
         display="initial"
         position="relative"
       />

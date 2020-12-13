@@ -1,17 +1,17 @@
 import React from 'react';
-import { Card, Button, ProgressBar } from 'react-bootstrap';
+import { Card, ProgressBar } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { FiShare2 } from 'react-icons/fi';
+
 function UserCard({ course, addToPublic, deleteCourse }) {
   let history = useHistory();
-  let now = (course.time_watched / course.total_duration) * 100;
+  let now = Math.floor((course.time_watched / course.total_duration) * 100);
 
   return (
     <Card>
       <Card.Img
         onClick={() => {
-          console.log(course);
           history.push(`/course/${course._id}`);
         }}
         variant="top"
@@ -23,19 +23,22 @@ function UserCard({ course, addToPublic, deleteCourse }) {
       </Card.Body>
       <Card.Body className="justify-content-between d-flex">
         <Card.Link
+        className='pointer'
           onClick={() => {
             deleteCourse(course._id);
           }}
         >
-          <BsTrash className="font-1-5" />
+          <BsTrash 
+          className="font-1-5 icon" />
         </Card.Link>
         <Card.Link
+        className='pointer'
           onClick={() => {
             addToPublic(course._id);
             history.push('/public');
           }}
         >
-          <FiShare2 className="ml-2" />
+          <FiShare2 className="ml-2 icon" />
         </Card.Link>
       </Card.Body>
     </Card>

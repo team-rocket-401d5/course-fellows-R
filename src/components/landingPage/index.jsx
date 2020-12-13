@@ -1,5 +1,5 @@
 import React from 'react';
-import { Col, Container, Row, Button} from 'react-bootstrap';
+import { Col, Container, Row} from 'react-bootstrap';
 import landingImage from '../../assets/landing2.png';
 import {Link} from 'react-router-dom';
 

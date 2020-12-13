@@ -1,5 +1,5 @@
-import React ,{useState}from 'react';
-import { ListGroup, Image ,Modal ,Button} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { ListGroup, Image, Modal, Button } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
 import { If, Then, Else } from 'react-if';
 
@@ -19,12 +19,12 @@ function VideoList(props) {
               {item.section_title}
             </ListGroup.Item>
             {item.videos.map((item1) => {
-              console.log(`public`, props.ispublic);
               return (
                 <>
                   <If condition={!props.ispublic}>
                     <Then>
                       <ListGroup.Item
+                        action
                         key={item.video_id + item.section_title}
                         onClick={() => {
                           history.push(
@@ -32,23 +32,25 @@ function VideoList(props) {
                           );
                         }}
                       >
-                        {' '}
+                        <Image style={{ width: 150 }} src={item1.thumbnail} />
+
                         {item1.title}
                       </ListGroup.Item>
                     </Then>
                     <Else>
                       <ListGroup.Item
+                      
                         key={item.video_id + item.section_title}
                         onClick={() => {
-                            handleShow();
+                          handleShow();
                         }}
                       >
-                        {' '}
+                        <Image style={{ width: 150 }} src={item1.thumbnail} />
+
                         {item1.title}
                       </ListGroup.Item>
                     </Else>
                   </If>
-                  <Image style={{ width: 200 }} src={item1.thumbnail} />{' '}
                 </>
               );
             })}
@@ -58,7 +60,8 @@ function VideoList(props) {
                 <Modal.Title>Invalid Action</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                You have to add the course to your courses to be able to view the contents
+                You have to add the course to your courses to be able to view
+                the contents
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="secondary" onClick={handleClose}>

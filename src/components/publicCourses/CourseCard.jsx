@@ -12,11 +12,13 @@ const addToCoursesUrl = 'http://localhost:4000/public/addtocourse';
 function AddButton(props) {
   return (
     <Card.Link
+    className='pointer'
+
       onClick={() => {
         props.handleAdd(props.courseId);
       }}
     >
-      <BsPlusSquare />
+      <BsPlusSquare className="icon"/>
       Add
     </Card.Link>
 
@@ -83,7 +85,9 @@ function CourseCard(props) {
             <Col key={item._id + item.publisher} xs={12} sm={6} lg={3}>
               <Card key={item._id + item.publisher}>
                 <Card.Img
+                className='pointer'
                   onClick={() => {
+                    
                     history.push(`/public/${item._id}`);
                   }}
                   variant="top"
@@ -99,6 +103,7 @@ function CourseCard(props) {
                   <Then>
                     <Card.Body className="justify-content-between d-flex">
                       <Card.Link
+                        className='pointer'
                         onClick={() => {
                           handleLike(item._id);
                         }}
@@ -106,10 +111,10 @@ function CourseCard(props) {
                         <If condition={item.likes.includes(context.user.username)}>
 
                           <Then>
-                            <BsHeartFill />
+                            <BsHeartFill className="icon clicked"/>
                           </Then>
                           <Else>
-                            <BsHeart />
+                            <BsHeart className="icon"/>
                           </Else>
                         </If>
                         {item.likes.length}
@@ -121,7 +126,7 @@ function CourseCard(props) {
                   <Else>
                     <Card.Body>
                       <Card.Link >
-                        <BsHeartFill/>
+                        <BsHeartFill />
                         {item.likes.length}
                       </Card.Link>
                     </Card.Body>
