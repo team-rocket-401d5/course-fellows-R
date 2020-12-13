@@ -14,6 +14,7 @@ export const RegisterContext = React.createContext();
 function RegisterProvider(props) {
   const [loggedIn, setloggedIn] = useState(false);
   const [user, setuser] = useState({});
+  const [token, setToken] = useState('');
 
   const validateToken = token => {
     console.log(token);
@@ -30,8 +31,10 @@ function RegisterProvider(props) {
   };
   const setLoginState = (loggedIn, token, user) => {
     cookie.save('auth', token);
+    setToken(token);
     setuser(user);
     setloggedIn(loggedIn);
+    setToken(token);
     console.log('hi', user);
   };
   const login = async (username, password) => {
@@ -42,6 +45,7 @@ function RegisterProvider(props) {
         .set('authorization', `Basic ${btoa(`${username}:${password}`)}`);
       console.log('userrr', response.body);
       validateToken(response.body.token);
+      console.log(response.body.token);
     } catch (e) {
       console.error(e.message);
     }
@@ -79,6 +83,7 @@ function RegisterProvider(props) {
     logout,
     signup,
     oauth,
+    token,
   };
   console.log('bbb', state);
 

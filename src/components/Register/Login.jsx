@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { If, Else, Then } from 'react-if';
 import { RegisterContext } from '../../context/auth';
-import { Button, Form, Navbar,Container ,Col,Row} from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import Oauth from './Oauth';
 
 function Login(props) {
