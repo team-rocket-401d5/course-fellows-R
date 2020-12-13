@@ -6,6 +6,7 @@ import ChatBubble from './ChatBubble.js';
 
 function Chat(props) {
   // let msg = ''
+  console.log("payload",props.payload);
   const [input,setInput] = useState('')
   const handleMsgChange = (e) => {
     setInput(e.target.value);

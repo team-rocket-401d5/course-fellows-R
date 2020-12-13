@@ -18,11 +18,11 @@ function App() {
 			<RegisterProvider>
 				<SocketClientProvider>
 					<Nav />
-
+					
 					<Switch>
 						<Route exact path="/" component={Home} />
 						<Route path="/register" component={Register} />
-						<Route path="/party" component={JoinRoom} />
+						<Route path="/joinRoom" component={JoinRoom} />
 						<Route path="/course/:id" component={DetailCourse} />
 						<Route path="/public/:publicid" component={DetailCourse} />
 						<Route path="/video/:courseId/:id" component={Detailvideo} />

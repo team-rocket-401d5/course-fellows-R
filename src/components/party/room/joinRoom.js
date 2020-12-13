@@ -7,6 +7,7 @@ import { SocketClientContext } from '../../../context/socketClientContext.js'
 let roomId='';
 function JoinRoom(props) {
   const context = useContext(SocketClientContext);
+
   let action='';
   let history = useHistory();
 
