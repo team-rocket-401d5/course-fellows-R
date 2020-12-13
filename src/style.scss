@@ -1,10 +1,12 @@
 #root {
   padding-top: 56px;
 }
+
 ul {
   list-style-type: none;
   padding: 0;
 }
+
 nav {
   position: fixed;
   top: 0;
@@ -55,6 +57,7 @@ nav {
     background-size: cover;
     background-position-y: 140px;
     transform: scale(-1, 1);
+    pointer-events: none;
     // top: 0;
     // left: 0;
     // right: 0;
@@ -71,16 +74,6 @@ nav {
     background-color: #306998;
   }
 }
-.section {
-  li {
-    padding: 0.5em 0;
-  }
-  .section-title {
-    background-color: #306998;
-    color: #f1f1f1;
-    padding-left: 1em;
-  }
-}
 // utilities
 .flex-center {
   display: flex;
@@ -91,11 +84,12 @@ nav {
 .btn {
   background-color: #306998;
   color: #fff;
-  border-radius: 10px;
+  border-radius: 3px;
   align-self: flex-end;
   &:hover {
-    background-color: #4b8bbe;
+    background-color: #e96c28;
     color: #fff;
+    border-color: #e96c28;
     transition: all 0.15s ease-in-out;
   }
 }
@@ -108,7 +102,10 @@ nav {
 .pointer {
   cursor: pointer;
 }
-
-.main-color-bg {
-  color: #306998;
+.height-100{
+  height: calc(100vh - 56px);
+}
+.overflow-y{
+  overflow-y: scroll;
+  
 }

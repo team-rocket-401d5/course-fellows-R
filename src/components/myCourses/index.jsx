@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
-import { Container, Col, Row } from 'react-bootstrap';
+import { Button, Form, Container, Col, Row } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
 import UserCard from './UserCard';
 import CreateCourseForm from '../createCourseForm';
+
 function MyCourses() {
   let url = `http://localhost:4000`;
   const { user, token } = useContext(RegisterContext);
@@ -17,38 +18,44 @@ function MyCourses() {
       .catch(e => console.log(e));
   }
   useEffect(() => {
-    console.log(user.username);
     getCourses();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token, url]);
 
-  async function addToPublic(courseId) {
+
+  function addToPublic(courseId) {
     // /:user/courses/:course
-    await superagent
+    superagent
       .post(`${url}/user/${user.username}/courses/${courseId}`)
-      .set('authorization', `bearer ${token}`);
+      .set('authorization', `bearer ${token}`)
+      .catch((e) => console.log(e.message));
   }
 
-  async function deleteCourse(courseId) {
+  function deleteCourse(courseId) {
     // /:user/courses/:course
-    const { body } = await superagent
+    superagent
       .delete(`${url}/user/${user.username}/courses/${courseId}`)
-      .set('authorization', `bearer ${token}`);
+      .set('authorization', `bearer ${token}`)
+      .catch((e) => console.log(e.message));
+
     getCourses();
 
-    console.log(body);
   }
 
   return (
     <section className="my-courses">
       <Container>
         <CreateCourseForm />
-        <h2 className="title">My Courses</h2>
+        <h2 className="title">My Courses</h2>        
         <article>
           <Row>
-            {courses.map(item => (
+            {courses.map((item) => (
               <Col xs={12} sm={6} lg={3} key={item._id}>
-                <UserCard course={item} addToPublic={addToPublic} deleteCourse={deleteCourse} />
+                <UserCard
+                  course={item}
+                  addToPublic={addToPublic}
+                  deleteCourse={deleteCourse}
+                />
               </Col>
             ))}
           </Row>

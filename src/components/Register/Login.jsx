@@ -47,11 +47,12 @@ function Login(props) {
 					<Form.Group controlId="formBasicPassword" >
 						<Form.Label>Password</Form.Label>
 						<Form.Control
-							type="text"
+							type="password"
 							name="password"
 							placeholder="Enter password"
 							onChange={handleChange}
 							className="mr-sm-2"
+							
 						/>
 					</Form.Group>
     

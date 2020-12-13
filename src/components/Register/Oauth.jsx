@@ -11,7 +11,7 @@ function Oauth() {
 
   const responseGoogle = async response => {
     console.log(response);
-    console.log(response.profileObj.email);
+  
 
     const email = { email: response.profileObj.email };
     context.oauth(email);
