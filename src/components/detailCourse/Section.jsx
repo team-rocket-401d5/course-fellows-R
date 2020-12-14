@@ -1,5 +1,6 @@
 import React from 'react';
 import { ListGroup, Card, ProgressBar, ListGroupItem, Button, Row, Col } from 'react-bootstrap';
+import uniqId from 'uniqid';
 import { If } from 'react-if';
 import { Link } from 'react-router-dom';
 
@@ -32,7 +33,14 @@ function Section(props) {
                   >
                     Edit course
                   </Link>{' '}
-                  <Button>Create Room</Button>{' '}
+                  <Link
+                    to={{
+                      pathname: `/party/${uniqId()}`,
+                      state: { payload: props.course.sections },
+                    }}
+                  >
+                    Create Room
+                  </Link>{' '}
                 </Row>
               </Card.Text>
             </Card.Text>
