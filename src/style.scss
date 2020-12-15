@@ -1,0 +1,136 @@
+#root {
+  padding-top: 56px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  background: #306998;
+  z-index: 100;
+
+  a {
+    color: #f1f1f1 !important;
+  }
+  .navbar-toggler {
+    border-color: #f1f1f1 !important;
+  }
+  .navbar-toggler-icon {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(241,241,241)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E") !important;
+  }
+}
+
+.register {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  .oauth {
+    button {
+      width: 100% !important ;
+      margin: 20px 0;
+    }
+  }
+}
+
+.landing {
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  position: relative;
+
+  img {
+    transform: scale(-1, 1);
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    // height: calc(100% - 56px);
+    height: calc(100%);
+    width: 100%;
+    background: url('./assets/wave2.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: 140px;
+    transform: scale(-1, 1);
+    pointer-events: none;
+    // top: 0;
+    // left: 0;
+    // right: 0;
+    // bottom: 0;
+  }
+}
+.my-courses {
+  .user-courses-btns {
+    button {
+      padding: 0.12em 0.6em;
+    }
+  }
+  .progress-bar {
+    background-color: #306998;
+  }
+}
+// utilities
+.flex-center {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.btn {
+  background-color: #306998;
+  color: #fff;
+  border-radius: 3px;
+  align-self: flex-end;
+  &:hover {
+    background-color: #e96c28;
+    color: #fff;
+    border-color: #e96c28;
+    transition: all 0.15s ease-in-out;
+  }
+}
+.icon {
+  color: #306998;
+  width: 20px;
+  &:hover {
+    color: #e96c28;
+  }
+  &.clicked {
+    color: #e96c28;
+  }
+}
+.equal-btn {
+  justify-content: space-between;
+  button,
+  a {
+    width: 45%;
+    font-size: 0.7rem;
+  }
+}
+.font-1-5 {
+  font-size: 1.5rem;
+}
+.font-2 {
+  font-size: 2rem;
+}
+.pointer {
+  cursor: pointer;
+}
+.height-100 {
+  height: calc(100vh - 56px);
+}
+.height-50 {
+  height: calc(100vh - 200px);
+}
+
+.width-75 {
+  width: calc(70vw);
+}
+.overflow-y {
+  overflow-y: scroll;
+}
+
