@@ -7,14 +7,14 @@ import ChatBubble from './ChatBubble.js';
 function Chat(props) {
   // let msg = ''
   const [input, setInput] = useState('');
+
   const handleMsgChange = e => {
-    console.log(e.target.value);
     setInput(e.target.value);
   };
   const handleFormSumbit = e => {
     e.preventDefault();
     if (input.trim() !== '') {
-      console.log(input);
+      console.log("input from form",input);
       props.handleMsgSubmit(input);
     }
     setInput('');
@@ -25,7 +25,7 @@ function Chat(props) {
       {props.payload.map(item => (
         <ChatBubble text={item} />
       ))}
-      <Form onSubmit={handleFormSumbit}>
+      <Form onSubmit={handleFormSumbit} >
         <Form.Control
           type="text"
           placeholder="Send a message"
