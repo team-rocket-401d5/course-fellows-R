@@ -6,7 +6,7 @@ function Oauth() {
   const context = useContext(RegisterContext);
   let options = {
     client_id: '1014187475049-t1ia1v1in4t4us48lmlsugme36of0as0.apps.googleusercontent.com',
-    redirect_uri: 'https://course-fellows.netlify.app/oauth',
+    redirect_uri: 'https://course-fellows.herokuapp.com/oauth',
   };
 
   const responseGoogle = async response => {
