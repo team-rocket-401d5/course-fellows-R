@@ -14,7 +14,7 @@ function Video(props) {
   const { user, token } = useContext(RegisterContext);
 
   const updateNote = (note, user1) => {
-    let url = 'http://localhost:4000';
+    let url = 'https://course-fellows.herokuapp.com';
     //:user/courses/:course/:vidID/notes
     superagent
       .patch(
@@ -30,7 +30,7 @@ function Video(props) {
   function get() {
     superagent
       .get(
-        ` http://localhost:4000/user/${user.username}/courses/${props.courseId}/${props.videoId}`
+        ` https://course-fellows.herokuapp.com/user/${user.username}/courses/${props.courseId}/${props.videoId}`
       )
       .set('authorization', `bearer ${token}`)
       .then(({ body }) => {

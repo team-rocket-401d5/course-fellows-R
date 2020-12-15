@@ -1,5 +1,5 @@
 import React from 'react';
-import { ListGroup, Button } from 'react-bootstrap';
+import { ListGroup } from 'react-bootstrap';
 function VideoList({ videos, setActiveVideo }) {
   // url_simple
   return (

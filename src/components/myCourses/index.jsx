@@ -6,7 +6,7 @@ import UserCard from './UserCard';
 import CreateCourseForm from '../createCourseForm';
 
 function MyCourses() {
-  let url = `http://localhost:4000`;
+  let url = `https://course-fellows.herokuapp.com`;
   const { user, token } = useContext(RegisterContext);
   // user/:user/courses to get all courses for one user
   let [courses, setCourses] = useState([]);

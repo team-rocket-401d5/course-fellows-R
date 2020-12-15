@@ -20,7 +20,7 @@ function CustomizedCourse({ location }) {
   const [videoIndex, setVideoIndex] = useState(false);
   const [selectedSection, setSelectedSection] = useState(false);
   const handleClose = () => setShow(false);
-  let backend = 'http://localhost:4000';
+  let backend = 'https://course-fellows.herokuapp.com';
   const handleShow = () => setShow(true);
 
   function create(url) {

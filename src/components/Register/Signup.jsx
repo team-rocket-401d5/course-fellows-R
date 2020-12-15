@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { RegisterContext } from '../../context/auth';
 import { If, Else, Then } from 'react-if';
-import { Button, Form, Row, Container } from 'react-bootstrap';
+import { Button, Form} from 'react-bootstrap';
 import Oauth from './Oauth';
 
 function Signup(props) {

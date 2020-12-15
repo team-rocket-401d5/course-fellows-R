@@ -1,7 +1,7 @@
 import io from 'socket.io-client';
 let socket;
 export const initiateSocket = () => {
-  socket = io('http://localhost:4000');
+  socket = io('https://course-fellows.herokuapp.com');
   console.log(`Connecting socket...`);
   socket.emit('join');
   socket.on('get message', message => {

@@ -4,11 +4,11 @@ import jwt from 'jsonwebtoken';
 import superagent from 'superagent';
 import cookie from 'react-cookies';
 dotenv.config();
-const LOGIN = process.env.LOGIN || `http://localhost:4000/signin`;
-const SIGNUP = process.env.SIGNUP || `http://localhost:4000/signup`;
+const LOGIN = process.env.LOGIN || `https://course-fellows.herokuapp.com/signin`;
+const SIGNUP = process.env.SIGNUP || `https://course-fellows.herokuapp.com/signup`;
 const SECRET = process.env.JWT_SECRET || 'mysecret';
 
-const postUrl = 'http://localhost:4000/oauth';
+const postUrl = 'https://course-fellows.herokuapp.com/oauth';
 
 export const RegisterContext = React.createContext();
 function RegisterProvider(props) {

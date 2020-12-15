@@ -6,8 +6,8 @@ import { BsHeart, BsHeartFill, BsPlusSquare } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
 import { If, Then, Else } from 'react-if';
 import { RegisterContext } from '../../context/auth';
-const putLikeURL = 'http://localhost:4000/public/like';
-const addToCoursesUrl = 'http://localhost:4000/public/addtocourse';
+const putLikeURL = 'https://course-fellows.herokuapp.com/public/like';
+const addToCoursesUrl = 'https://course-fellows.herokuapp.com/public/addtocourse';
 
 function AddButton(props) {
   return (

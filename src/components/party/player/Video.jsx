@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-let player;
+
 function Video({ activeVideo, player }) {
   console.log(activeVideo);
   //   const [player, setPlayer] = useState({});
@@ -8,12 +8,10 @@ function Video({ activeVideo, player }) {
   //     setPlayer(new YTPlayer('#player').load(activeVideo));
   //     console.log(player);
   //   }
-  function playerLoad() {
-    player.load('GKSRyLdjsPA');
-  }
 
   useEffect(() => {
     if (player) player.load(activeVideo);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeVideo]);
   return <div id="player">{}</div>;
 }

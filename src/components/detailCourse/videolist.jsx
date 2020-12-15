@@ -20,38 +20,35 @@ function VideoList(props) {
             </ListGroup.Item>
             {item.videos.map((item1) => {
               return (
-                <>
-                  <If condition={!props.ispublic}>
-                    <Then>
-                      <ListGroup.Item
-                        action
-                        key={item.video_id + item.section_title}
-                        onClick={() => {
-                          history.push(
-                            `/video/${props.course._id}/${item1.video_id}`
-                          );
-                        }}
-                      >
-                        <Image style={{ width: 150 }} src={item1.thumbnail} />
+                <If condition={!props.ispublic}>
+                  <Then>
+                    <ListGroup.Item
+                      action
+                      key={item.video_id + item.section_title}
+                      onClick={() => {
+                        history.push(
+                          `/video/${props.course._id}/${item1.video_id}`
+                        );
+                      }}
+                    >
+                      <Image style={{ width: 150 }} src={item1.thumbnail} />
 
-                        {item1.title}
-                      </ListGroup.Item>
-                    </Then>
-                    <Else>
-                      <ListGroup.Item
-                      
-                        key={item.video_id + item.section_title}
-                        onClick={() => {
-                          handleShow();
-                        }}
-                      >
-                        <Image style={{ width: 150 }} src={item1.thumbnail} />
+                      {item1.title}
+                    </ListGroup.Item>
+                  </Then>
+                  <Else>
+                    <ListGroup.Item
+                      key={item.video_id + item.section_title}
+                      onClick={() => {
+                        handleShow();
+                      }}
+                    >
+                      <Image style={{ width: 150 }} src={item1.thumbnail} />
 
-                        {item1.title}
-                      </ListGroup.Item>
-                    </Else>
-                  </If>
-                </>
+                      {item1.title}
+                    </ListGroup.Item>
+                  </Else>
+                </If>
               );
             })}
 

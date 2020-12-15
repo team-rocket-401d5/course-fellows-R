@@ -8,7 +8,7 @@ import superagent from 'superagent';
 import VideoList from './player/VideoList';
 import { Container, Row, Col } from 'react-bootstrap';
 
-let backendURL = 'http://localhost:4000';
+let backendURL = 'https://course-fellows.herokuapp.com';
 let socket;
 let player;
 function SocketClient(props) {
@@ -99,7 +99,7 @@ function SocketClient(props) {
   }
   function getMsgs(roomId) {
     superagent
-      .get(`http://localhost:4000/messages/${roomId}`)
+      .get(`https://course-fellows.herokuapp.com/messages/${roomId}`)
       .then(({ body }) => {
         if(body){
           setMessages(body.messages);
@@ -133,6 +133,7 @@ function SocketClient(props) {
     return () => {
       disconnectSocket();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

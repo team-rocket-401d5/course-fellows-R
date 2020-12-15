@@ -1,11 +1,19 @@
 import React from 'react';
-import { ListGroup, Card, ProgressBar, ListGroupItem, Button, Row, Col } from 'react-bootstrap';
+import {
+  ListGroup,
+  Card,
+  ProgressBar,
+  ListGroupItem,
+  Row,
+} from 'react-bootstrap';
 import uniqId from 'uniqid';
 import { If } from 'react-if';
 import { Link } from 'react-router-dom';
 
 function Section(props) {
-  let now = Math.floor((props.course.time_watched / props.course.total_duration) * 100);
+  let now = Math.floor(
+    (props.course.time_watched / props.course.total_duration) * 100
+  );
 
   console.log('prop', props.ispublic);
   // /:user/courses/:course'
@@ -18,7 +26,10 @@ function Section(props) {
           <If condition={!props.ispublic}>
             <Card.Text>
               <ProgressBar now={now} className="mb-2" />
-              <Card.Text style={{ textAlign: 'center' }}> {now}% COMPLETE</Card.Text>
+              <Card.Text style={{ textAlign: 'center' }}>
+                {' '}
+                {now}% COMPLETE
+              </Card.Text>
               <Card.Text>
                 <Row className="equal-btn">
                   <Link
@@ -32,7 +43,7 @@ function Section(props) {
                     }}
                   >
                     Edit course
-                  </Link>{' '}
+                  </Link>
                   <Link
                     to={{
                       pathname: `/party/${uniqId()}`,
@@ -40,7 +51,7 @@ function Section(props) {
                     }}
                   >
                     Create Room
-                  </Link>{' '}
+                  </Link>
                 </Row>
               </Card.Text>
             </Card.Text>
@@ -48,15 +59,14 @@ function Section(props) {
         </Card.Body>
 
         <ListGroup className="list-group-flush">
-          {props.course.sections.map(item => {
+          {props.course.sections.map((item) => {
             // thumbnail
             return (
-              <>
-                <ListGroupItem>
-                  {' '}
-                  <Card.Link href={`#${item.section_title}`}>{item.section_title}</Card.Link>{' '}
-                </ListGroupItem>
-              </>
+              <ListGroupItem key={item.section_title + 'aside'}>
+                <Card.Link href={`#${item.section_title}`}>
+                  {item.section_title}
+                </Card.Link>{' '}
+              </ListGroupItem>
             );
           })}
         </ListGroup>

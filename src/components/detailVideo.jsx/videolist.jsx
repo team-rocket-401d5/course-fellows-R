@@ -8,7 +8,7 @@ import { If, Else, Then } from 'react-if';
 
 function WatchStatus(props) {
   const [isWatched, setIsWatched] = useState(props.item.isWatched);
-  const url = 'http://localhost:4000';
+  const url = 'https://course-fellows.herokuapp.com';
 
   const handleIsWatched = () => {
     superagent
@@ -42,7 +42,7 @@ function WatchStatus(props) {
 }
 
 function VideoList(props) {
-  const url = 'http://localhost:4000';
+  const url = 'https://course-fellows.herokuapp.com';
   let history = useHistory();
   const { user, token } = useContext(RegisterContext);
   const [course, setCourse] = useState({ sections: [], playlist: {} });
@@ -101,9 +101,10 @@ function VideoList(props) {
                   <>
                     <ListGroup.Item
                       action
-                      key={item.video_id + item.section_title}
+                      key={item1.video_id + item.section_title}
                     >
                       <WatchStatus
+                        key={item1.video_id + 'check'}
                         item={item1}
                         courseId={props.courseId}
                         user={user.username}

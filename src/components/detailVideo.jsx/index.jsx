@@ -6,7 +6,7 @@ import Video from './video';
 import VideoList from './videolist';
 
 function Detailvideo(props) {
-  const url = 'http://localhost:4000';
+  const url = 'https://course-fellows.herokuapp.com';
   const [video, setVideo] = useState({});
 
   const {
