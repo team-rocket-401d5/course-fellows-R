@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import superagent from 'superagent';
 import CourseCard from './CourseCard';
 
-const getCourseURL = 'http://localhost:4000/public/';
+const getCourseURL = 'https://course-fellows.herokuapp.com/public/';
 
 function PublicCourses(props) {
   const [courses, setCourses] = useState([]);

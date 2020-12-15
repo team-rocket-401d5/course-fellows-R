@@ -3,7 +3,7 @@ import { If, Else, Then } from 'react-if';
 import { Link } from 'react-router-dom';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
 function MainNav() {
   const context = useContext(RegisterContext);

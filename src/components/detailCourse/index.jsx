@@ -14,7 +14,7 @@ function DetailCourse(props) {
     const { match: { params } } = props
     const { user, token } = useContext(RegisterContext);
 
-    let url = `http://localhost:4000`
+    let url = `https://course-fellows.herokuapp.com`
 
     useEffect(() => {
         if (params.id) {

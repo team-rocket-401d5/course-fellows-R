@@ -4,11 +4,16 @@ import {
   Card,
   ProgressBar,
   ListGroupItem,
+  Row,
 } from 'react-bootstrap';
-import { If} from 'react-if';
+import uniqId from 'uniqid';
+import { If } from 'react-if';
+import { Link } from 'react-router-dom';
 
 function Section(props) {
-  let now = Math.floor((props.course.time_watched / props.course.total_duration) * 100);
+  let now = Math.floor(
+    (props.course.time_watched / props.course.total_duration) * 100
+  );
 
   console.log('prop', props.ispublic);
   // /:user/courses/:course'
@@ -25,6 +30,30 @@ function Section(props) {
                 {' '}
                 {now}% COMPLETE
               </Card.Text>
+              <Card.Text>
+                <Row className="equal-btn">
+                  <Link
+                    className="btn"
+                    to={{
+                      pathname: '/createCourse',
+                      state: {
+                        payload: props.course._id,
+                        method: 'edit',
+                      },
+                    }}
+                  >
+                    Edit course
+                  </Link>
+                  <Link
+                    to={{
+                      pathname: `/party/${uniqId()}`,
+                      state: { payload: props.course.sections },
+                    }}
+                  >
+                    Create Room
+                  </Link>
+                </Row>
+              </Card.Text>
             </Card.Text>
           </If>
         </Card.Body>
@@ -33,14 +62,11 @@ function Section(props) {
           {props.course.sections.map((item) => {
             // thumbnail
             return (
-              <>
-                <ListGroupItem>
-                  {' '}
-                  <Card.Link href={`#${item.section_title}`}>
-                    {item.section_title}
-                  </Card.Link>{' '}
-                </ListGroupItem>
-              </>
+              <ListGroupItem key={item.section_title + 'aside'}>
+                <Card.Link href={`#${item.section_title}`}>
+                  {item.section_title}
+                </Card.Link>{' '}
+              </ListGroupItem>
             );
           })}
         </ListGroup>

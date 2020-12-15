@@ -20,10 +20,9 @@ function CustomizedCourse({ location }) {
   const [videoIndex, setVideoIndex] = useState(false);
   const [selectedSection, setSelectedSection] = useState(false);
   const handleClose = () => setShow(false);
-  let backend = 'http://localhost:4000';
+  let backend = 'https://course-fellows.herokuapp.com';
   const handleShow = () => setShow(true);
 
-  
   function create(url) {
     console.log(url);
     let playlist = { playlist: url };
@@ -34,6 +33,22 @@ function CustomizedCourse({ location }) {
       .then(({ body: result }) => {
         setImportedPlaylist(result);
         setSections([{ section_title: 'secretTitle', videos: [...result.items] }]);
+      })
+      .then(() => {
+        console.log(sections);
+      })
+      .catch(e => console.log(e));
+  }
+  // '/:user/courses/:course'
+  function edit(id) {
+    // /:user/courses/:course'
+    superagent
+      .get(`${backend}/user/${user.username}/courses/${id}`)
+      .set('authorization', `bearer ${token}`)
+      .then(({ body: result }) => {
+        console.log('Edit', result);
+        setImportedPlaylist({ author: result.author, playlist: result.playlist });
+        setSections(result.sections);
       })
       .then(() => {
         console.log(sections);
@@ -113,6 +128,23 @@ function CustomizedCourse({ location }) {
       })
       .catch(e => console.log(e));
   }
+  function editCourse() {
+    const { playlist, author } = importedPlaylist;
+    // /:user/courses/:course
+    console.log(`${backend}/user/${user.username}/courses/${location.state.payload}`);
+    superagent
+      .put(`${backend}/user/${user.username}/courses/${location.state.payload}`)
+      .send({ playlist, author, sections, user: user.username })
+      .set('authorization', `bearer ${token}`)
+      .then(({ body: result }) => {
+        console.log(result);
+      })
+      .then(() => {
+        console.log(sections);
+        history.push(`/course/${location.state.payload}`);
+      })
+      .catch(e => console.log(e));
+  }
 
   useEffect(() => {
     console.log(location.state.method);
@@ -121,12 +153,15 @@ function CustomizedCourse({ location }) {
       case 'create':
         create(location.state.payload);
         break;
+      case 'edit':
+        edit(location.state.payload);
+        break;
 
       default:
         break;
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -151,10 +186,22 @@ function CustomizedCourse({ location }) {
         </Modal.Footer>
       </Modal>
       <h1>Organize Course</h1>
-      <button className="btn" onClick={addCourse}>
-        Create
-      </button>
-      <button className="btn" onClick={()=>{history.push('/')}}>
+      {location.state.method === 'create' ? (
+        <button className="btn" onClick={addCourse}>
+          Create
+        </button>
+      ) : (
+        <button className="btn" onClick={editCourse}>
+          edit
+        </button>
+      )}
+
+      <button
+        className="btn"
+        onClick={() => {
+          history.push('/');
+        }}
+      >
         Cancel
       </button>
 

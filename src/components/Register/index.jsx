@@ -5,7 +5,6 @@ import Signup from './Signup';
 import { If, Else, Then } from 'react-if';
 import { Container, Image, Col, Row } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
-let image = 'https://i.pinimg.com/originals/6b/e3/69/6be369b11b50e0b1c3a2fea19ba7e2ba.png';
 
 function Register() {
   let history = useHistory();
