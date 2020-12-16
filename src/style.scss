@@ -222,6 +222,8 @@ main {
   align-self: flex-end;
   padding: 0.6em 1em;
   text-transform: capitalize;
+  border-color: $secondary-color !important;
+
   &:hover {
     background-color: $secondary-color-o;
     color: #f1f1f1;
