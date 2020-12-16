@@ -41,7 +41,7 @@ function Section(props) {
                       state: { payload: props.course.sections },
                     }}
                   >
-                    Create Room
+                    Create Party
                   </Link>
                 </Row>
               </Card.Text>

@@ -176,12 +176,14 @@ main {
   .chat-header {
     padding: 5px 10px;
     align-items: center;
+  
     justify-content: space-between;
     p {
       margin: 0;
     }
   }
   .chat-body {
+
     flex-basis: auto;
     .toast-body {
       padding: 0.5rem 0.75rem;
@@ -201,6 +203,7 @@ main {
 }
 .chat-toggle {
   padding: 5px 50px;
+   background:#e96c28 !important;
   right: 0;
   bottom: 0;
 }
