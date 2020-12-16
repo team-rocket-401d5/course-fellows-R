@@ -26,27 +26,22 @@ function Detailvideo(props) {
           setVideo(body);
           // setNote(body.note)
         })
-        .catch((e) => console.log(e));
+        .catch(e => console.log(e));
     }
   }, [courseId, id, token, user.username]);
 
   return (
     <>
-      <Container fluid>
+      <section class="detail-video height-100">
         <Row noGutters>
-          <Col className="overflow-y height-100" xs={12} md={3}>
-            <VideoList
-              video={video}
-              courseId={courseId}
-              videoId={id}
-              user={user.username}
-            />
+          <Col className="overflow-y height-md-100 mt-3 " xs={12} md={3}>
+            <VideoList video={video} courseId={courseId} videoId={id} user={user.username} />
           </Col>
-          <Col className="height-100" xs={12} md={6}>
-            <Video video={video} courseId={courseId} videoId={id}  />
+          <Col className="height-100 px-2 p-3" xs={12} md={9}>
+            <Video video={video} courseId={courseId} videoId={id} />
           </Col>
         </Row>
-      </Container>
+      </section>
     </>
 
     // <Container fluid >

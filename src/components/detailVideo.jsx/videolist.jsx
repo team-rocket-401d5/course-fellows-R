@@ -12,9 +12,7 @@ function WatchStatus(props) {
 
   const handleIsWatched = () => {
     superagent
-      .put(
-        `${url}/user/${props.user}/courses/${props.courseId}/${props.item.video_id}/isWatched`
-      )
+      .put(`${url}/user/${props.user}/courses/${props.courseId}/${props.item.video_id}/isWatched`)
       .set('authorization', `bearer ${props.token}`)
       .then(({ body }) => {
         setIsWatched(!isWatched);
@@ -28,10 +26,12 @@ function WatchStatus(props) {
           onClick={() => {
             handleIsWatched();
           }}
+          className="mr-2 "
         />
       </Then>
       <Else>
         <BsCheckCircle
+          className="mr-2 sub-color"
           onClick={() => {
             handleIsWatched();
           }}
@@ -63,7 +63,7 @@ function VideoList(props) {
         .then(({ body }) => {
           setCourse(body);
         })
-        .catch((e) => console.log(e));
+        .catch(e => console.log(e));
     } else {
       superagent
         .get(`${url}/user/${props.user}/courses/${props.courseId}`)
@@ -71,38 +71,33 @@ function VideoList(props) {
         .then(({ body }) => {
           console.log('paramss', body);
           setCourse(body);
-          setProgress(
-            Math.floor((body.time_watched / body.total_duration) * 100)
-          );
+          setProgress(Math.floor((body.time_watched / body.total_duration) * 100));
         })
-        .catch((e) => console.log(e));
+        .catch(e => console.log(e));
     }
-  }, [
-    props.courseId,
-    props.publicid,
-    props.user,
-    token,
-    user.username,
-    changed,
-  ]);
+  }, [props.courseId, props.publicid, props.user, token, user.username, changed]);
 
   return (
     <>
-      <ProgressBar now={progress} label={`${progress}%`} className="mb-2" />
+      <div className="px-3">
+        <ProgressBar now={progress} className="mb-2" className="progress-sub-color" />
+      </div>
+      <p className="text-center mt-3">{progress}% COMPLETE</p>
       <ListGroup>
-        {course.sections.map((item) => {
+        {course.sections.map(item => {
           return (
             <>
-              <ListGroup.Item id={item.section_title} key={item.section_title}>
+              <ListGroup.Item
+                id={item.section_title}
+                key={item.section_title}
+                className="text-capitalize section-title"
+              >
                 {item.section_title}
               </ListGroup.Item>
-              {item.videos.map((item1) => {
+              {item.videos.map(item1 => {
                 return (
                   <>
-                    <ListGroup.Item
-                      action
-                      key={item1.video_id + item.section_title}
-                    >
+                    <ListGroup.Item action key={item1.video_id + item.section_title}>
                       <WatchStatus
                         key={item1.video_id + 'check'}
                         item={item1}
@@ -113,9 +108,7 @@ function VideoList(props) {
                       />
                       <span
                         onClick={() => {
-                          history.push(
-                            `/video/${course._id}/${item1.video_id}`
-                          );
+                          history.push(`/video/${course._id}/${item1.video_id}`);
                         }}
                       >
                         {item1.title}

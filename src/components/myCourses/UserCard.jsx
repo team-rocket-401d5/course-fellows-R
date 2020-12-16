@@ -16,29 +16,29 @@ function UserCard({ course, addToPublic, deleteCourse }) {
         }}
         variant="top"
         src={course.playlist.thumbnail}
+        className="pointer"
       />
       <Card.Body>
         <Card.Title>{course.playlist.playlist_title}</Card.Title>
         <ProgressBar now={now} label={`${now}%`} className="mb-2" />
       </Card.Body>
-      <Card.Body className="justify-content-between d-flex">
+      <Card.Body className="justify-content-end d-flex">
         <Card.Link
-        className='pointer'
+          className="pointer"
           onClick={() => {
             deleteCourse(course._id);
           }}
         >
-          <BsTrash 
-          className="font-1-5 icon" />
+          <BsTrash className="font-1-5 icon" />
         </Card.Link>
         <Card.Link
-        className='pointer'
+          className="pointer"
           onClick={() => {
             addToPublic(course._id);
             history.push('/public');
           }}
         >
-          <FiShare2 className="ml-2 icon" />
+          <FiShare2 className=" icon" />
         </Card.Link>
       </Card.Body>
     </Card>

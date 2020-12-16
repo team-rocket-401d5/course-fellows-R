@@ -17,15 +17,13 @@ function Video(props) {
     let url = 'https://course-fellows.herokuapp.com';
     //:user/courses/:course/:vidID/notes
     superagent
-      .patch(
-        `${url}/user/${user1}/courses/${props.courseId}/${props.videoId}/notes`
-      )
+      .patch(`${url}/user/${user1}/courses/${props.courseId}/${props.videoId}/notes`)
       .set('authorization', `bearer ${token}`)
       .send({ note: note, user: user1 })
       .then(({ body }) => {
         get();
       })
-      .catch((e) => console.log('errroerere', e.message));
+      .catch(e => console.log('errroerere', e.message));
   };
   function get() {
     superagent
@@ -36,18 +34,18 @@ function Video(props) {
       .then(({ body }) => {
         setNote(body.note);
       })
-      .catch((e) => console.log(e));
+      .catch(e => console.log(e));
   }
   useEffect(() => {
     ///:user/courses/:course/:vidID
     get();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token, user.username, props.videoId]);
 
-  const handleChange = (e) => {
+  const handleChange = e => {
     setNote(e.target.value);
   };
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault();
     setNoteActive(false);
     updateNote(e.target.note.value, user.username);
@@ -78,7 +76,7 @@ function Video(props) {
         </Then>
         <Else>
           <Form onSubmit={handleSubmit}>
-            <textarea name="note" value={note} onChange={handleChange} />
+            <textarea name="note" value={note} onChange={handleChange} style={{ width: '100%' }} />
             <Button type="submit" value="Submit">
               Save
             </Button>
