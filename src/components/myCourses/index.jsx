@@ -58,7 +58,7 @@ function MyCourses() {
         <article>
           <Row>
             {courses.map(item => (
-              <Col xs={12} sm={6} lg={3} key={item._id} className="d-flex">
+              <Col xs={12} sm={6} lg={3} key={item._id} className="d-flex-sm">
                 <UserCard course={item} addToPublic={addToPublic} deleteCourse={deleteCourse} />
               </Col>
             ))}

@@ -61,7 +61,7 @@ function CourseCard(props) {
     <>
       <Row>
         {props.courses.map(item => (
-          <Col key={item._id + item.publisher} xs={12} sm={6} lg={3} className="d-flex">
+          <Col key={item._id + item.publisher} xs={12} sm={6} lg={3} className="d-flex-sm">
             <Card key={item._id + item.publisher}>
               <Card.Img
                 className="pointer d-flex align-items-center"
