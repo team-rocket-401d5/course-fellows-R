@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { BsHeart, BsHeartFill, BsPlusSquare } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';
@@ -12,32 +12,14 @@ const addToCoursesUrl = 'https://course-fellows.herokuapp.com/public/addtocourse
 function AddButton(props) {
   return (
     <Card.Link
-    className='pointer'
-
+      className="pointer d-flex align-items-center"
       onClick={() => {
         props.handleAdd(props.courseId);
       }}
     >
-      <BsPlusSquare className="icon"/>
+      <BsPlusSquare />
       Add
     </Card.Link>
-
-    // {/* <Card.Link>
-    // <If condition={!isAdded}>
-    //   <Then>
-    //     <BsBookmarkPlus
-    //       onClick={() => {
-    //         props.handleAdd(props.courseId);
-    //         setIsAdded(!isAdded);
-    //       }}
-    //     />
-    //     Add
-    //   </Then>
-    //   <Else>
-    //     <BsBookmarkFill />
-    //   </Else>
-    // </If>
-    // </Card.Link> */}
   );
 }
 
@@ -67,7 +49,6 @@ function CourseCard(props) {
       .set('authorization', `bearer ${context.token}`)
       .send({ username: context.user.username })
       .then(({ body }) => {
-
         history.push('/');
       });
   }
@@ -76,67 +57,62 @@ function CourseCard(props) {
     props.update();
   }, [props, like]);
 
-
   return (
     <>
-      <Container>
-        <Row>
-          {props.courses.map((item) => (
-            <Col key={item._id + item.publisher} xs={12} sm={6} lg={3}>
-              <Card key={item._id + item.publisher}>
-                <Card.Img
-                className='pointer'
-                  onClick={() => {
-                    
-                    history.push(`/public/${item._id}`);
-                  }}
-                  variant="top"
-                  src={item.playlist.thumbnail}
-                />
-                <Card.Body>
-                  <Card.Title>{item.playlist.playlist_title}</Card.Title>
-                  <Card.Text>
-                    <b>From:</b> {item.publisher}
-                  </Card.Text>
-                </Card.Body>
-                <If condition={context.loggedIn}>
-                  <Then>
-                    <Card.Body className="justify-content-between d-flex">
-                      <Card.Link
-                        className='pointer'
-                        onClick={() => {
-                          handleLike(item._id);
-                        }}
-                      >
-                        <If condition={item.likes.includes(context.user.username)}>
+      <Row>
+        {props.courses.map(item => (
+          <Col key={item._id + item.publisher} xs={12} sm={6} lg={3} className="d-flex">
+            <Card key={item._id + item.publisher}>
+              <Card.Img
+                className="pointer d-flex align-items-center"
+                onClick={() => {
+                  history.push(`/public/${item._id}`);
+                }}
+                variant="top"
+                src={item.playlist.thumbnail}
+              />
+              <Card.Body>
+                <Card.Title>{item.playlist.playlist_title}</Card.Title>
+                <Card.Text>
+                  <b>From:</b> {item.publisher.replace(/(@gmail.com)/g, '')}
+                </Card.Text>
+              </Card.Body>
+              <If condition={context.loggedIn}>
+                <Then>
+                  <Card.Body className="justify-content-end d-flex">
+                    <Card.Link
+                      className="pointer d-flex align-items-center"
+                      onClick={() => {
+                        handleLike(item._id);
+                      }}
+                    >
+                      <If condition={item.likes.includes(context.user.username)}>
+                        <Then>
+                          <BsHeartFill className="clicked" />
+                        </Then>
+                        <Else>
+                          <BsHeart />
+                        </Else>
+                      </If>
+                      {item.likes.length}
+                    </Card.Link>
 
-                          <Then>
-                            <BsHeartFill className="icon clicked"/>
-                          </Then>
-                          <Else>
-                            <BsHeart className="icon"/>
-                          </Else>
-                        </If>
-                        {item.likes.length}
-                      </Card.Link>
-
-                      <AddButton handleAdd={handleAdd} courseId={item._id} />
-                    </Card.Body>
-                  </Then>
-                  <Else>
-                    <Card.Body>
-                      <Card.Link >
-                        <BsHeartFill />
-                        {item.likes.length}
-                      </Card.Link>
-                    </Card.Body>
-                  </Else>
-                </If>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </Container>
+                    <AddButton handleAdd={handleAdd} courseId={item._id} />
+                  </Card.Body>
+                </Then>
+                <Else>
+                  <Card.Body>
+                    <Card.Link>
+                      <BsHeartFill />
+                      {item.likes.length}
+                    </Card.Link>
+                  </Card.Body>
+                </Else>
+              </If>
+            </Card>
+          </Col>
+        ))}
+      </Row>
     </>
   );
 }

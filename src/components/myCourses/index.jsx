@@ -47,7 +47,7 @@ function MyCourses() {
       <Container>
         <CreateCourseForm show={modalShow} onHide={() => setModalShow(false)} />
         <Container>
-          <Row className="justify-content-between">
+          <Row className="justify-content-between pb-4">
             <h2 className="title">My Courses</h2>
             <Button variant="primary" onClick={() => setModalShow(true)}>
               Add a new Course

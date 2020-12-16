@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom';
 import { RegisterContext } from '../../context/auth';
 import superagent from 'superagent';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Container, ListGroup } from 'react-bootstrap';
 import { BsFillPlusCircleFill, BsXCircleFill } from 'react-icons/bs';
 import { v1 as uuid } from 'uuid';
 import SectionForm from './sectionForm';
@@ -165,108 +165,122 @@ function CustomizedCourse({ location }) {
   }, []);
 
   return (
-    <section>
-      <Modal show={show} onHide={handleClose} centered>
-        <Modal.Body>
-          <SectionForm sectionName={sectionName} setSectionName={setSectionName} />
-        </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleClose();
-              createSection();
-            }}
-          >
-            create
-          </Button>
-        </Modal.Footer>
-      </Modal>
-      <h1>Organize Course</h1>
-      {location.state.method === 'create' ? (
-        <button className="btn" onClick={addCourse}>
-          Create
-        </button>
-      ) : (
-        <button className="btn" onClick={editCourse}>
-          edit
-        </button>
-      )}
+    <Container>
+      <section>
+        <Modal show={show} onHide={handleClose} centered>
+          <Modal.Body>
+            <SectionForm sectionName={sectionName} setSectionName={setSectionName} />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                handleClose();
+                createSection();
+              }}
+            >
+              create
+            </Button>
+          </Modal.Footer>
+        </Modal>
+        <div
+          className="d-flex mt-3 mb-2"
+          style={{ justifyContent: 'space-between', flexWrap: 'wrap' }}
+        >
+          <h1>Organize Course</h1>
+          <div className="btn-group">
+            {location.state.method === 'create' ? (
+              <button className="btn" onClick={addCourse}>
+                Create
+              </button>
+            ) : (
+              <button className="btn" onClick={editCourse}>
+                edit
+              </button>
+            )}
 
-      <button
-        className="btn"
-        onClick={() => {
-          history.push('/');
-        }}
-      >
-        Cancel
-      </button>
+            <button
+              className="btn ml-2"
+              onClick={() => {
+                history.push('/');
+              }}
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
 
-      <DragDropContext onDragEnd={handleDragEnd}>
-        {sections.map((section, index) => {
-          return (
-            <Droppable key={uuid()} droppableId={index.toString()}>
-              {provided => (
-                <ul
-                  className="section Unstyled"
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {section.section_title === 'secretTitle' ? (
-                    ''
-                  ) : (
-                    <li className="section-title">{section.section_title}</li>
-                  )}
+        <DragDropContext onDragEnd={handleDragEnd}>
+          {sections.map((section, index) => {
+            return (
+              <Droppable key={uuid()} droppableId={index.toString()}>
+                {provided => (
+                  <ListGroup
+                    className="section Unstyled"
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {section.section_title === 'secretTitle' ? (
+                      ''
+                    ) : (
+                      <ListGroup.Item className="section-title mt-3 main-color main-white">
+                        {section.section_title}
+                      </ListGroup.Item>
+                    )}
 
-                  {section.videos.map((video, index) => (
-                    <Draggable
-                      key={video.video_id}
-                      draggableId={video.video_id}
-                      index={index}
-                      id={index}
-                    >
-                      {provided => (
-                        <li
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          ref={provided.innerRef}
-                        >
-                          <span
-                            className="pointer"
-                            onClick={() => {
-                              handleShow();
-                              setVideoIndex(index);
-                              console.log(videoIndex);
-                              setSelectedSection(section.section_title);
-                            }}
+                    {section.videos.map((video, index) => (
+                      <Draggable
+                        key={video.video_id}
+                        draggableId={video.video_id}
+                        index={index}
+                        id={index}
+                      >
+                        {provided => (
+                          <ListGroup.Item
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            ref={provided.innerRef}
                           >
-                            <BsFillPlusCircleFill color="#306998" className="main-color-bg mr-2" />
-                          </span>
-                          <span
-                            className="pointer"
-                            onClick={() => {
-                              deleteVideo(section.section_title, video.video_id);
-                            }}
-                          >
-                            <BsXCircleFill color="#306998" className="main-color-bg mr-2" />
-                          </span>
+                            <span
+                              className="pointer"
+                              onClick={() => {
+                                handleShow();
+                                setVideoIndex(index);
+                                console.log(videoIndex);
+                                setSelectedSection(section.section_title);
+                              }}
+                            >
+                              <BsFillPlusCircleFill
+                                color="#306998"
+                                className="main-color-bg mr-2"
+                              />
+                            </span>
+                            <span
+                              className="pointer"
+                              onClick={() => {
+                                deleteVideo(section.section_title, video.video_id);
+                              }}
+                            >
+                              <BsXCircleFill color="#306998" className="main-color-bg mr-2" />
+                            </span>
 
-                          <span>{video.title}</span>
-                        </li>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          );
-        })}
-      </DragDropContext>
-    </section>
+                            <span>{video.title}</span>
+                          </ListGroup.Item>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </ListGroup>
+                )}
+              </Droppable>
+            );
+          })}
+        </DragDropContext>
+      </section>
+    </Container>
   );
 }
 

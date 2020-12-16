@@ -5,6 +5,8 @@ import Signup from './Signup';
 import { If, Else, Then } from 'react-if';
 import { Container, Image, Col, Row } from 'react-bootstrap';
 import { RegisterContext } from '../../context/auth';
+import signupImage from '../../assets/signup-t.png';
+//
 
 function Register() {
   let history = useHistory();
@@ -17,18 +19,10 @@ function Register() {
   return (
     <>
       <section className="register">
-        <Container
-          className="justify-content-md-center"
-          fluid="sm"
-          style={{ paddingTop: 39 }}
-        >
+        <Container className="justify-content-md-center" fluid="sm" style={{ paddingTop: 39 }}>
           <Row>
             <Col md="8">
-              <Image
-                src="https://i.pinimg.com/564x/1b/61/21/1b61216ceaccc25f3c386dce23ea567e.jpg"
-                className="img-fluid"
-                rounded
-              />
+              <Image src={signupImage} className="img-fluid" rounded />
             </Col>
             <Col md="4">
               <If condition={wantSignup}>
@@ -52,9 +46,7 @@ function Register() {
                   setWantSignup(!wantSignup);
                 }}
               >
-                {wantSignup
-                  ? 'Dont have account? sign up now'
-                  : 'already a user?'}
+                {wantSignup ? 'Dont have account? sign up now' : 'already a user?'}
               </a>
             </Col>
           </Row>

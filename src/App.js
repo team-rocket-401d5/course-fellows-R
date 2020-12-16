@@ -18,17 +18,19 @@ function App() {
         {/* <SocketClientProvider> */}
         <Nav />
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/register" component={Register} />
-          {/* <Route exact path="/party" component={JoinRoom} /> */}
-          <Route path="/course/:id" component={DetailCourse} />
-          <Route path="/public/:publicid" component={DetailCourse} />
-          <Route path="/video/:courseId/:id" component={Detailvideo} />
-          <Route path="/party/:roomId" component={SocketClient} />
-          <Route path="/public" component={PublicCourses} />
-          <Route path="/createCourse" component={CustomizedCourse} />
-        </Switch>
+        <main>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/register" component={Register} />
+            {/* <Route exact path="/party" component={JoinRoom} /> */}
+            <Route path="/course/:id" component={DetailCourse} />
+            <Route path="/public/:publicid" component={DetailCourse} />
+            <Route path="/video/:courseId/:id" component={Detailvideo} />
+            <Route path="/party/:roomId" component={SocketClient} />
+            <Route path="/public" component={PublicCourses} />
+            <Route path="/createCourse" component={CustomizedCourse} />
+          </Switch>
+        </main>
         {/* </SocketClientProvider> */}
       </RegisterProvider>
     </div>
