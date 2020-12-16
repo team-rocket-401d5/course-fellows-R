@@ -24,7 +24,7 @@ function UserCard({ course, addToPublic, deleteCourse }) {
       </Card.Body>
       <Card.Body className="justify-content-end d-flex">
         <Card.Link
-          className="pointer"
+          className="pointer d-flex align-items-center"
           onClick={() => {
             deleteCourse(course._id);
           }}
@@ -32,7 +32,7 @@ function UserCard({ course, addToPublic, deleteCourse }) {
           <BsTrash className="font-1-5 icon" />
         </Card.Link>
         <Card.Link
-          className="pointer"
+          className="pointer d-flex align-items-center"
           onClick={() => {
             addToPublic(course._id);
             history.push('/public');
