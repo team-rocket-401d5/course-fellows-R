@@ -12,11 +12,11 @@ function Landing() {
             <img src={landingImage} alt="landing page" className="img-fluid" />
           </Col>
           <Col md={{ span: 6, order: 2 }} className="flex-center pb-3">
-            <h2>This is heading to describe the website</h2>
+            <h2>Grow your Knowledge, Keep it organized</h2>
             <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum harum laudantium
-              porro praesentium maxime voluptatem aspernatur non enim ab minus. Quae dignissimos
-              atque sit corporis commodi nemo quidem eum expedita! Id, totam ducimus possimus dolore
+            With Course Fellows, you can organize and optimize your online learning experience, 
+            Share your it with other online learners, 
+            and stay focused instead of wandering through sites full of distractions. 
             </p>
             <Link to="/register" className="btn">
               Join now
