@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import superagent from 'superagent';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Card from 'react-bootstrap/Card';
 import { BsHeart, BsHeartFill, BsPlusSquare } from 'react-icons/bs';
 import { useHistory } from 'react-router-dom';

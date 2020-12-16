@@ -11,7 +11,7 @@ function Section(props) {
   // /:user/courses/:course'
   return (
     <>
-      <Card style={{ width: '100%' }} className="mt-3" className="course-details-section">
+      <Card style={{ width: '100%' }} className="mt-3 course-details-section">
         <Card.Img variant="top" src={`${props.course.playlist.thumbnail}`} />
         <Card.Body>
           <Card.Title className="section-title">{props.course.playlist.playlist_title}</Card.Title>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 import { RegisterContext } from '../../context/auth';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import Video from './video';
 import VideoList from './videolist';
 
@@ -44,13 +44,6 @@ function Detailvideo(props) {
       </section>
     </>
 
-    // <Container fluid >
-    //     <Row noGutters >
-    //         <Col className=' overflow-y height-100' xs={12} md={3}><Section course={course} ispublic={ispublic} /></Col>
-    //         <Col className="overflow-y height-100" xs={12} md={9}> <VideoList course={course} ispublic={ispublic} /></Col>
-    //     </Row>
-
-    // </Container>
   );
 }
 

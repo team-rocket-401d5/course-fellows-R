@@ -80,7 +80,7 @@ function VideoList(props) {
   return (
     <>
       <div className="px-3">
-        <ProgressBar now={progress} className="mb-2" className="progress-sub-color" />
+        <ProgressBar now={progress} className="mb-2 progress-sub-color" />
       </div>
       <p className="text-center mt-3">{progress}% COMPLETE</p>
       <ListGroup>

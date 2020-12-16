@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import superagent from 'superagent';
 import { RegisterContext } from '../../context/auth';
-import { Container, Row, Col } from 'react-bootstrap';
+import { Row, Col } from 'react-bootstrap';
 import VideoList from './videolist';
 import Section from './Section';
 
