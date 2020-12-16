@@ -30,7 +30,7 @@ function MainNav() {
               </Then>
               <Else>
                 <Nav.Link as={Link} to="/register">
-                  Login
+                  Sign In
                 </Nav.Link>
               </Else>
             </If>

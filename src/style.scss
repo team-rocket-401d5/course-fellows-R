@@ -304,3 +304,9 @@ main {
     width: 60vw !important;
   }
 }
+
+@media (min-width: 576px) {
+  .d-flex-sm {
+    display: flex;
+  }
+}
