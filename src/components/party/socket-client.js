@@ -20,7 +20,6 @@ function SocketClient(props) {
   } = props;
   const controlChat = useRef();
   const chat = useRef();
-  console.log('ana id', params);
   const initObj = { room_id: params.roomId, messages: [{ msg: '', user: '' }] };
   function playerInit() {
     player = new YTPlayer('#player', {
@@ -29,11 +28,9 @@ function SocketClient(props) {
     });
 
     player.on('playing', () => {
-      console.log('played');
       socket.emit('play');
     });
     player.on('paused', () => {
-      console.log('paused', player.getCurrentTime());
       socket.emit('pause', player.getCurrentTime());
     });
   }
@@ -41,7 +38,6 @@ function SocketClient(props) {
   const [activeVideo, setActiveVideo] = useState('');
   const initiateSocket = () => {
     socket = io(`${backendURL}`);
-    console.log(`Connecting socket...`);
     socket.emit('roomId init', params.roomId);
     socket.emit('join');
     postRoom(initObj);
@@ -88,14 +84,12 @@ function SocketClient(props) {
   };
 
   function updateActiveVideo(video) {
-    console.log(video);
     socket.emit('update active video', video);
     setActiveVideo(video);
   }
 
   function handleMsgSubmit(message) {
     let emitted = { msg: message, user: registerContext.user.username };
-    console.log('from send message', emitted);
     socket.emit('msg', emitted);
 
     putMsgs({ room_id: params.roomId, messages: emitted });
@@ -104,7 +98,6 @@ function SocketClient(props) {
     superagent.get(`https://course-fellows.herokuapp.com/messages/${roomId}`).then(({ body }) => {
       if (body) {
         setMessages(body.messages);
-        // console.log(body, messages);
         // context.socket.emit('chat message', { emitted, roomId });
       }
     });
@@ -113,16 +106,11 @@ function SocketClient(props) {
     superagent
       .post(`${backendURL}/messages`)
       .send(msgs)
-      .then(({ body }) => console.log('post body', body));
   }
   function putMsgs(msgs) {
-    console.log('putMsgs sent', msgs);
     superagent
       .put(`${backendURL}/messages`)
       .send(msgs)
-      .then(({ body }) => {
-        console.log('put body', body);
-      });
   }
   function toggleChat() {
     // console.log(chat, controlChat);

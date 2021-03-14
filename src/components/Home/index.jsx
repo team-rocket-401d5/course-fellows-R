@@ -6,7 +6,6 @@ import { RegisterContext } from '../../context/auth';
 
 function Home() {
   const context = useContext(RegisterContext);
-  console.log(context.loggedIn);
   return (
     <>
       <If condition={context.loggedIn}>

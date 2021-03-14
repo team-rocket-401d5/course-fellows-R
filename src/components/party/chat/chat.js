@@ -14,7 +14,6 @@ function Chat({ chat, payload, handleMsgSubmit, toggleChat }) {
   const handleFormSumbit = e => {
     e.preventDefault();
     if (input.trim() !== '') {
-      console.log('input from form', input);
       handleMsgSubmit(input);
     }
     setInput('');

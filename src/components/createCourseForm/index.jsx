@@ -27,7 +27,6 @@ function CreateCourseForm(props) {
               placeholder="youtube.com/playlist?list=course-id"
               value={url}
               onChange={(e) => {
-                console.log(e.target.value);
                 setUrl(e.target.value);
               }}
             />

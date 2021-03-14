@@ -9,7 +9,6 @@ import { v1 as uuid } from 'uuid';
 import SectionForm from './sectionForm';
 
 function CustomizedCourse({ location }) {
-  console.log(location.state.payload);
   const history = useHistory();
   const { token, user } = useContext(RegisterContext);
   // eslint-disable-next-line no-unused-vars
@@ -24,7 +23,6 @@ function CustomizedCourse({ location }) {
   const handleShow = () => setShow(true);
 
   function create(url) {
-    console.log(url);
     let playlist = { playlist: url };
     superagent
       .post(`${backend}/playlist`)
@@ -34,11 +32,9 @@ function CustomizedCourse({ location }) {
         setImportedPlaylist(result);
         setSections([{ section_title: 'secretTitle', videos: [...result.items] }]);
       })
-      .then(() => {
-        console.log(sections);
-      })
       .catch(e => console.log(e));
   }
+
   // '/:user/courses/:course'
   function edit(id) {
     // /:user/courses/:course'
@@ -46,20 +42,17 @@ function CustomizedCourse({ location }) {
       .get(`${backend}/user/${user.username}/courses/${id}`)
       .set('authorization', `bearer ${token}`)
       .then(({ body: result }) => {
-        console.log('Edit', result);
         setImportedPlaylist({ author: result.author, playlist: result.playlist });
         setSections(result.sections);
       })
-      .then(() => {
-        console.log(sections);
-      })
       .catch(e => console.log(e));
   }
+
   function insertAt(array, index, element) {
     array.splice(index, 0, element);
   }
+
   function createSection() {
-    console.log(videoIndex);
     const currentSections = sections;
     // if no sections yet
     if (sections.length === 1 && sections[0].section_title === 'secretTitle') {
@@ -78,12 +71,10 @@ function CustomizedCourse({ location }) {
       videos: postVideos,
     };
     insertAt(currentSections, sectionIndex + 1, newSection);
-    console.log(currentSections);
     setSections(currentSections);
   }
 
   function handleDragEnd(result) {
-    console.log(result);
     let currentSections = [...sections];
     const [toTransfer] = currentSections[result.source.droppableId].videos.splice(
       result.source.index,
@@ -96,59 +87,45 @@ function CustomizedCourse({ location }) {
     );
     setSections(currentSections);
   }
+
   function deleteVideo(sectionName, id) {
     const currentSections = [...sections];
     const sectionIndex = currentSections.findIndex(
       section => section.section_title === sectionName
     );
-    debugger;
     const videoIndex = currentSections[sectionIndex].videos.findIndex(
       video => video.video_id === id
     );
-    console.log('__videoIndex__', videoIndex);
-    let deletedVideo = currentSections[sectionIndex].videos.splice(videoIndex, 1);
-    console.log(currentSections);
-    console.log(deletedVideo);
+    currentSections[sectionIndex].videos.splice(videoIndex, 1);
     setSections(currentSections);
   }
 
   function addCourse() {
-    console.log(importedPlaylist, sections);
     const { playlist, author } = importedPlaylist;
     superagent
       .post(`${backend}/user/${user.username}/course`)
       .send({ playlist, author, sections, user: user.username })
       .set('authorization', `bearer ${token}`)
-      .then(({ body: result }) => {
-        console.log(result);
-      })
       .then(() => {
-        console.log(sections);
         history.push('/');
       })
       .catch(e => console.log(e));
   }
+
   function editCourse() {
     const { playlist, author } = importedPlaylist;
     // /:user/courses/:course
-    console.log(`${backend}/user/${user.username}/courses/${location.state.payload}`);
     superagent
       .put(`${backend}/user/${user.username}/courses/${location.state.payload}`)
       .send({ playlist, author, sections, user: user.username })
       .set('authorization', `bearer ${token}`)
-      .then(({ body: result }) => {
-        console.log(result);
-      })
       .then(() => {
-        console.log(sections);
         history.push(`/course/${location.state.payload}`);
       })
       .catch(e => console.log(e));
   }
 
   useEffect(() => {
-    console.log(location.state.method);
-    console.log(location.state.payload);
     switch (location.state.method) {
       case 'create':
         create(location.state.payload);
@@ -179,6 +156,7 @@ function CustomizedCourse({ location }) {
               variant="primary"
               onClick={() => {
                 handleClose();
+                setSectionName("");
                 createSection();
               }}
             >
@@ -249,7 +227,6 @@ function CustomizedCourse({ location }) {
                               onClick={() => {
                                 handleShow();
                                 setVideoIndex(index);
-                                console.log(videoIndex);
                                 setSelectedSection(section.section_title);
                               }}
                             >

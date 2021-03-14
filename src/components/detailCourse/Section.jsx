@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 function Section(props) {
   let now = Math.floor((props.course.time_watched / props.course.total_duration) * 100);
 
-  console.log('prop', props.ispublic);
   // /:user/courses/:course'
   return (
     <>
@@ -54,7 +53,6 @@ function Section(props) {
             // thumbnail
             return (
               <If condition={item.section_title !== 'secretTitle'}>
-                {console.log(item.section_title)}
                 <ListGroupItem
                   key={item.section_title + 'aside'}
                   action

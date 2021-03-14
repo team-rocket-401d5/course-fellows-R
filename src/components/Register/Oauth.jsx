@@ -10,10 +10,7 @@ function Oauth() {
   };
 
   const responseGoogle = async response => {
-    console.log(response);
-  
-
-    const email = { email: response.profileObj.email };
+      const email = { email: response.profileObj.email };
     context.oauth(email);
   };
   //   return <a href={authURL}>continue with google</a>;

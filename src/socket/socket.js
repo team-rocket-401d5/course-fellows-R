@@ -21,7 +21,6 @@ export const disconnectSocket = () => {
 // };
 export const getMessage = message => {
   return socket.on('get message', message => {
-    console.log('message from socket', message);
   });
 };
 export const sendMessage = message => {

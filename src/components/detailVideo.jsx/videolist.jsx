@@ -55,7 +55,6 @@ function VideoList(props) {
   };
 
   useEffect(() => {
-    console.log(user.username, props.courseId);
     if (props.publicid) {
       superagent
         .get(`${url}/public/${props.courseId}`)
@@ -69,7 +68,6 @@ function VideoList(props) {
         .get(`${url}/user/${props.user}/courses/${props.courseId}`)
         .set('authorization', `bearer ${token}`)
         .then(({ body }) => {
-          console.log('paramss', body);
           setCourse(body);
           setProgress(Math.floor((body.time_watched / body.total_duration) * 100));
         })

@@ -23,7 +23,7 @@ function Video(props) {
       .then(({ body }) => {
         get();
       })
-      .catch(e => console.log('errroerere', e.message));
+      .catch(e => console.log('an error occurred', e.message));
   };
   function get() {
     superagent

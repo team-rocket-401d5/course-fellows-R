@@ -13,7 +13,6 @@ function Register() {
   let [wantSignup, setWantSignup] = useState(false);
   const { loggedIn } = useContext(RegisterContext);
   useEffect(() => {
-    console.log('hi');
     if (loggedIn) history.push('/');
   }, [history, loggedIn]);
   return (
